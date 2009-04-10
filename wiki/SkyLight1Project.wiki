@@ -1,13 +1,6 @@
 #This is where we'll post our notes and specs on the project
 
-Description:
-
-
-= Details =
-
 The use case can be found [SkylightUseCase here].
-
-
 
 TODO:
 *Use case for sensor data capturing tool.
