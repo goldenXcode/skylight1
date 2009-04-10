@@ -1,0 +1,29 @@
+#summary The Skylight use case.
+
+= Skylight Use Case =
+
+*Description:* The user plays the game.
+
+*Primary Actor:* Two or more users.
+
+*Primary Flow:*
+||1||The user launches the Skylight game.||
+||2||The system introduces the game and provides an option to start a game.||
+||3||The user selects the option to start a game.||
+||4||The system presents instructions to the current user.||
+||5||The user holds the device such that the camera is obscured.||
+||6||The system provides a three second _start count-down_, and then begins an animation that informs the user how the device must be moved, and shows a _passing count-down_.||
+||7||The user moves the device accordingly, passes the device to the next user, and removes his or her hand so as to unobscure the camera, all within the time limit.||
+||8||The system presents the user with a success animation, and then resumes at step 2 with the new user.||
+
+*Alternate Flow: User aborts during the _start count-down_*
+||6a||The user removes their hand prior to the end of the _start count-down_.||
+||6b||The system resumes the primary flow at step 4.||
+
+*Alternate Flow: User does not complete the pass before the _passing count-down_ completes*
+||7a||The user does not unobscure the camera by the end of the _passing count-down_.||
+||7b||The system begins a timed-out animation, indicating that the current user has lost the game.  Once the animation is complete, the system resumes the primary flow at step 2.||
+
+*Alternate Flow: User moves the device inappropriately*
+||7a||The user moves the device inappropriately (unsteady hand, wrong direction, wrong orientation, etc.)||
+||7b||The system begins an unsteady-hand animation, indicating that the current user has lost the game.  Once the animation is complete, the system resumes the primary flow at step 2.||
