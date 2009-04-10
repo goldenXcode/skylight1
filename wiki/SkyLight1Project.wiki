@@ -9,4 +9,7 @@ The use case can be found [SkylightUseCase here].
 
 
 
-TODO: Use Cases, Requirements, Design Spec
+TODO:
+*Use case for sensor data capturing tool.
+*Designs
+*Action items (or are they just issues?)
