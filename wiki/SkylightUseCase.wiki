@@ -12,7 +12,7 @@
 ||3||The user selects the option to start a game.||
 ||4||The system presents instructions to the current user.||
 ||5||The user holds the device such that the camera is obscured.||
-||6||The system provides a three second _start count-down_, and then begins an animation that informs the user how the device must be moved, and shows a _passing count-down_.||
+||6||The system provides a three second _start count-down_, and then begins to communicate tothe user how the device must be moved, and shows a _passing count-down_.||
 ||7||The user moves the device accordingly, passes the device to the next user, and removes his or her hand so as to unobscure the camera, all within the time limit.||
 ||8||The system presents the user with a success animation, and then resumes at step 2 with the new user.||
 
