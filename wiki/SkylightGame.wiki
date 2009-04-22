@@ -3,5 +3,5 @@
 A game of manual dexterity for three or more players.
 
 See:
- *[SkylightUseCase Skylight Game use case]
- *[SkylightGameDesign Skylight Game design]
+ * [SkylightUseCase Skylight Game use case]
+ * [SkylightGameDesign Skylight Game design]
