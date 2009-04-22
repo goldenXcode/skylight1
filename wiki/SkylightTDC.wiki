@@ -1,0 +1,6 @@
+#summary Skylight TDC home page.
+
+A tool for capturing test data on an Android phone.
+
+See:
+ *[SkylightTDCUseCase Skylight TDC use case]
