@@ -1,0 +1,8 @@
+#labels Phase-Implementation
+#additional resources, links, tips
+
+Requirement for some of the Eclipse Android projects checked out from svn:
+
+Go to Eclipse prefs->Java->Build Path->Classpath Variables->New...
+
+add a variable name ANDROID_LIB whose value is the path you your SDK's android.jar file 
