@@ -1,3 +1,4 @@
+#summary Info about External events QA
 #labels Phase-QA
 Matrix of external events and expected/current behavior of application.
 
