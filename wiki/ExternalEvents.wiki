@@ -1,4 +1,3 @@
-#summary One-sentence summary of this page.
 #labels Phase-QA
 Matrix of external events and expected/current behavior of application.
 
@@ -16,5 +15,11 @@ The table listed below shows the expected/current behavior of the game to extern
 || Succeed ||	Succeed || Succeed || Ready || Home || || placeholder ||
 || Fail ||	Fail || Fail || Welcome || Repeats crash sound || || placeholder||
 || About ||	About|| TODO||
+
+Orientation Change Notes:
+
+On the TODO is to disable screen rotation for all parts of the game to ease layout issues.
+
+Here is a link to the Google spreadsheets page. It may just be easier to review/update that file.
 
 [http://spreadsheets.google.com/ccc?key=0AqQtuZ0XRK_LdE5mejl2ODJDeGlqelNjdFQzQjllVHc&hl=en External Test Matrix]
