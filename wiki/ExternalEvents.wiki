@@ -1,0 +1,20 @@
+#summary One-sentence summary of this page.
+#labels Phase-QA
+Matrix of external events and expected/current behavior of application.
+
+== Introduction ==
+
+The table listed below shows the expected/current behavior of the game to external events.
+
+== Details ==
+
+|| *Screen/Page* || *Task Switcher* || || *Back* || || *Menu* || || *Orientation Change* ||
+|| || _Desired_ || _Current_ || _Desired_ || _Current_ || _Desired_ || _Current_ || _TBD_ ||
+|| Welcome || Welcome || Welcome || Home || Home || See Notes || placeholder || ||
+|| Ready ||	Ready||	Ready || Welcome || Welcome || || placeholder||
+|| Skill Test || Skill Test at point of pause || Ready || Ready || Ready|| || placeholder ||
+|| Succeed ||	Succeed || Succeed || Ready || Home || || placeholder ||
+|| Fail ||	Fail || Fail || Welcome || Repeats crash sound || || placeholder||
+|| About ||	About|| TODO||
+
+[http://spreadsheets.google.com/ccc?key=0AqQtuZ0XRK_LdE5mejl2ODJDeGlqelNjdFQzQjllVHc&hl=en External Test Matrix]
