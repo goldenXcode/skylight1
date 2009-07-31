@@ -23,4 +23,5 @@ On the TODO is to disable screen rotation for all parts of the game to ease layo
 
 Here is a link to the Google spreadsheets page. It may just be easier to review/update that file.
 
-[http://spreadsheets.google.com/ccc?key=0AqQtuZ0XRK_LdE5mejl2ODJDeGlqelNjdFQzQjllVHc&hl=en External Test Matrix]
+[http://spreadsheets.google.com/ccc?key=0AqQtuZ0XRK_LdE5mejl2ODJDeGlqelNjdFQzQjllVHc&hl=en
+External Test Matrix]
