@@ -1,0 +1,23 @@
+#summary List of items that are to be done/not done for Beta milestone.
+
+= Introduction =
+
+An active list of items which should be achieved for the Beta milestone.
+
+= Details =
+
+Items that are IN should be done. Items that are OUT should be removed.
+
+== IN ==
+
+ * Local high score - should hold highest level achieved.
+ * Open issues in External QA Test Matrix. See [http://code.google.com/p/skylight1/wiki/ExternalEvents External QA Test Matrix]
+ * Address garbage collection
+ * Better level/time indicator
+
+== OUT ==
+
+ * # of players
+ * Blackout based on level
+ * Global high school
+ * Advertising
