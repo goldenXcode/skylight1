@@ -20,4 +20,5 @@ Items that are IN should be done. Items that are OUT should be removed.
  * # of players
  * Blackout based on level
  * Global high score
+ * Indication of high score during play
  * Advertising
