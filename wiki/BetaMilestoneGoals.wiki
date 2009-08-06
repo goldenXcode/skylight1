@@ -19,5 +19,5 @@ Items that are IN should be done. Items that are OUT should be removed.
 
  * # of players
  * Blackout based on level
- * Global high school
+ * Global high score
  * Advertising
