@@ -6,7 +6,7 @@ An active list of items which should be achieved for the Beta milestone.
 
 = Details =
 
-Items that are IN should be done. Items that are OUT should be removed.
+Items that are IN should be done. Items that are OUT should be removed/to be reviewed later.
 
 == IN ==
 
@@ -22,3 +22,4 @@ Items that are IN should be done. Items that are OUT should be removed.
  * Global high score
  * Indication of high score during play
  * Advertising
+ * Awards/citations for reaching various levels - i.e. Barkeep, Beermeister etc.
