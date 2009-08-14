@@ -13,12 +13,12 @@ Items that are IN should be done. Items that are OUT should be removed/to be rev
  * Local high score - should hold highest level achieved. DONE
  * Open issues in External QA Test Matrix. See [http://code.google.com/p/skylight1/wiki/ExternalEvents External QA Test Matrix]
  * Address garbage collection NOT A PROBLEM
- * Crashes after 46 levels
+ * Crashes after 46 levels. DONE
  * Better level/time indicator
 
 == OUT ==
 
- * Double vision
+ * Double vision. DONE
  * # of players
  * Blackout based on level
  * Global high score
