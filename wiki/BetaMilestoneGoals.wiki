@@ -25,4 +25,4 @@ Items that are IN should be done. Items that are OUT should be removed/to be rev
  * Indication of high score during play
  * Advertising
  * Awards/citations for reaching various levels - i.e. Barkeep, Beermeister etc.
- * Look into adding survey on uninstall to get user feedback
+ * ~~Look into adding survey on uninstall to get user feedback~~ Part of Android Market app - no developer access to results
