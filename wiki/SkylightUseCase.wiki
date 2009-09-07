@@ -13,17 +13,9 @@
 ||4||The user selects the option to start a game.||
 ||5||The user holds the device such that the camera is obscured. (deprecated)||
 ||6||The system provides a three second _start count-down_, and then begins to communicate to the user how the device must be moved, and shows a _passing count-down_. (deprecated)||
-||7||The user plays the skill test game for n (15) seconds ||
+||7||The user plays the skill test game successfully for n (15) seconds ||
 ||8||The system presents the user with a success animation, and then resumes at step 6 with the new user and skill level is increased.||
 
-*Alternate Flow: User aborts during the _start count-down_* (deprecated)
-||6a||The user removes their hand prior to the end of the _start count-down_.||
-||6b||The system resumes the primary flow at step 4.||
-
-*Alternate Flow: User does not complete the pass before the _passing count-down_ completes* (deprecated)
-||7a||The user does not unobscure the camera by the end of the _passing count-down_.||
-||7b||The system begins a timed-out animation, indicating that the current user has lost the game.  Once the animation is complete, the system resumes the primary flow at step 2.||
-
-*Alternate Flow: User moves the device inappropriately* (deprecated)
-||7a||The user moves the device inappropriately (unsteady hand, wrong direction, wrong orientation, etc.)||
-||7b||The system begins an unsteady-hand animation, indicating that the current user has lost the game.  Once the animation is complete, the system resumes the primary flow at step 2.||
+*Alternate Flow: User fails skill test activity *
+||7a||The user fails to complete skill test activity before allotted n seconds time ||
+||7b||The system resumes the primary flow at step 3.||
