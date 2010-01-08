@@ -4,3 +4,10 @@ A tool for capturing test data on an Android phone.
 
 See:
  * [TestDataCaptureApplication Skylight TDC use case]
+
+Note: the apk is available here under Downloads and on main page (not in Android Market)
+
+
+Screen shots:
+
+[http://skylight1.googlecode.com/files/skylight1TestDataCapture.png]
