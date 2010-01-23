@@ -8,4 +8,5 @@ See:
 
 
 Note: this "default" initial game of the Skylight framework is what became
-the [http://baancethebeer.com "Balance the Beer"] game.
+
+the [http://balancethebeer.com "Balance the Beer"] game.
