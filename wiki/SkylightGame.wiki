@@ -5,3 +5,7 @@ A game of manual dexterity for three or more players.
 See:
  * [SkylightUseCase Skylight Game use case]
  * [SkylightGameDesign Skylight Game design]
+
+
+Note: this "default" initial game of the Skylight framework is what became
+the [http://baancethebeer.com "Balance the Beer"] game.
