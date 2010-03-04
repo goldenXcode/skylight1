@@ -1,4 +1,4 @@
-= Welcome and thanks for downloading one our applications from the market =
+=== Welcome and thanks for downloading one our applications from the market ===
 
 Please note that each application on the market as a link and email address corresponding to that project (as shown in the Android Market):
 
@@ -6,7 +6,7 @@ Please note that each application on the market as a link and email address corr
  * [http://nycevents.nycjava.net NYC Events] - an app that lists NYC Parks, Art and Music events.  email: nycevents at nycjava.net
  * [http://toast.nycjava.net Toast] - an app that helps you make a toast with your phone! email: toast at nycjava.net
 
-== Reporting bugs, requesting help or suggesting features ==
+=== Reporting bugs, requesting help or suggesting features ===
 
 Please use the corresponding email address and we will respond asap or to expedite bug and feature requests use the Issues tracker on this website (see the Issues tab above).
 
