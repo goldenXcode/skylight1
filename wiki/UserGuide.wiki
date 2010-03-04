@@ -2,7 +2,7 @@
 
 Please note that each application on the market as a link and email address corresponding to that project (as shown in the Android Market):
 
- * [http://balancethebeer.com Balance the Beer] a casual social game for Android phones. email: balancethebber at nycjava.net 
+ * [http://balancethebeer.com Balance the Beer] a casual social game for Android phones. email: balancethebeer at nycjava.net 
  * [http://nycevents.nycjava.net NYC Events] - an app that lists NYC Parks, Art and Music events.  email: nycevents at nycjava.net
  * [http://toast.nycjava.net Toast] - an app that helps you make a toast with your phone! email: toast at nycjava.net
 
