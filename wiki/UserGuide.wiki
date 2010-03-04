@@ -1,0 +1,21 @@
+#User Guide
+
+= Welcome and thanks for downloading one our applications from the market =
+
+Please note that each application on the market as a link and email address corresponding to that project (shown in the Android Market)
+
+= Reporting bugs, requesting help or suggesting features =
+
+Please use the corresponding email address and we will respond asap or to expedite bug and feature requests - please use the Issues tracker on this website (see the Issues tab above).
+
+To submit an issue using the Issues tracker:
+
+# click on New Issue
+# select "Defect report from user" - use this even for feature requests
+# fill in the summary (indicate application) and fill in the description (please use the template) with as much detail as possible (e.g. exact model of phone and version of Android OS)
+# under Status - leave as New (we'll update it and you can be notified)
+# under Owner - leave blank (we'll fill this in)
+# under Labels (optional, we can also fill this in) feel free to specify:
+## Type
+## Priority
+## Name of Application (type it in - don't select from choices)
