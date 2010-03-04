@@ -10,4 +10,4 @@ Note: the apk is available here under Downloads and on main page (not in Android
 
 Screen shots:
 
-[http://skylight1.googlecode.com/files/skylight1TestDataCapture.png]
+[http://www.nycjava.net/JSPWiki/skylight1TestDataCapture.png]
