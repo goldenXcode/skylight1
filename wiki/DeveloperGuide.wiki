@@ -2,3 +2,14 @@
 
 Please stay tuned... work in progress - for issue tracking help see [UserGuide]
 
+How Do I Checkout Code (for Novices)
+
+I'll assume that you have done the following:
+a. Install the latest version of Eclipse.
+b. Install the Android SDK.
+c. Install the ADT plug-in for Eclipse.
+d. Install the subversion plug-in for Eclipse Subclipse (the one we use).
+
+Check out code
+
+Add ANDROID_LIB to project point to android.jar
