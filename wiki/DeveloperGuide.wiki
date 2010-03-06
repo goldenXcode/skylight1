@@ -1,15 +1,25 @@
 === Developer How To & Guidelines ===
 
-To submit issues for any of the apps or framework see the [UserGuide]
+To submit issues using the Issues tracker (tab above) see the [UserGuide]
 
-How Do I Checkout Code From Eclipse (for command line see Source tab above):
+How Do I Checkout Code From Eclipse (for command line see Source tab above)?
 
-I'll assume that you have done the following:
-
+Prerequisites:
   * Install the latest version of Eclipse.
   * Install the Android SDK.
   * Install the ADT plug-in for Eclipse.
-  * Install the subversion plug-in for Eclipse Subclipse (the one we use).
+  * Install the a subversion plug-in for Eclipse (we recommend Subclipse).
 
-Projects require a classpath variable called "ANDROID_LIB" to be set to the location of an android.jar file in your SDK directory. For example, on my machine it is set to "/home/user/Desktop/android/android-sdk-linux_x86-1.6_r1/platforms/android-2.1/android.jar" because I extracted the SDK to "/home/user/Desktop/android/android-sdk-linux_x86-1.6_r1". You can set classpath variables in Eclipse by going to:
+Some projects require a classpath variable called "ANDROID_LIB" to be set to the location of an android.jar file in your SDK directory.
+
+ For example, on my machine it is set to "/home/user/Desktop/android/android-sdk-linux_x86-1.6_r1/platforms/android-2.1/android.jar" because I extracted the SDK to "/home/user/Desktop/android/android-sdk-linux_x86-1.6_r1". 
+
+You can set classpath variables in Eclipse by going to:
 Window menu -> Preferences -> Java -> Build Path -> Classpath Variables
+
+Coding Guidelines:
+(to be continued)
+
+
+
+The Skylight1 open source project is open to all to participate in (submit patches, test, create derivative projects). The closed source project derivatives are limited to those members who attend our meetings (in NYC).
