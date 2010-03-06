@@ -1,8 +1,8 @@
 === Developer How To & Guidelines ===
 
-Please stay tuned... work in progress - for issue tracking help see [UserGuide]
+To submit issues for any of the apps or framework see the [UserGuide]
 
-How Do I Checkout Code (for Novices)
+How Do I Checkout Code From Eclipse (for command line see Source tab above):
 
 I'll assume that you have done the following:
 
@@ -11,5 +11,5 @@ I'll assume that you have done the following:
   * Install the ADT plug-in for Eclipse.
   * Install the subversion plug-in for Eclipse Subclipse (the one we use).
 
-Projects require a classpath variable called "ANDROID_LIB" to be set to the location of an android.jar file in your SDK directory. For example, on my machine it is set to "/home/user/Desktop/android/android-sdk-linux_x86-1.6_r1/platforms/android-1.6/android.jar" because I extracted the SDK to "/home/user/Desktop/android/android-sdk-linux_x86-1.6_r1". You can set classpath variables in Eclipse by going to:
+Projects require a classpath variable called "ANDROID_LIB" to be set to the location of an android.jar file in your SDK directory. For example, on my machine it is set to "/home/user/Desktop/android/android-sdk-linux_x86-1.6_r1/platforms/android-2.1/android.jar" because I extracted the SDK to "/home/user/Desktop/android/android-sdk-linux_x86-1.6_r1". You can set classpath variables in Eclipse by going to:
 Window menu -> Preferences -> Java -> Build Path -> Classpath Variables
