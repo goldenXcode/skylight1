@@ -4,6 +4,8 @@
 
 An active list of items which should be achieved for the Beta milestone.
 
+*_note: these are dated BTB (Balance the Beer) milestone notes_*
+
 = Details =
 
 Items that are IN should be done. Items that are OUT should be removed/to be reviewed later.
