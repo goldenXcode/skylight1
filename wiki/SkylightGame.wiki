@@ -1,4 +1,4 @@
-#summary Skylight Game home page.
+#summary Skylight Game Design home page.
 
 A game of manual dexterity for three or more players.
 
@@ -7,6 +7,6 @@ See:
  * [SkylightGameDesign Skylight Game design]
 
 
-Note: this "default" initial game of the Skylight framework is what became
+*_Note: this "default" initial game of the Skylight framework is what became
 
-the [http://balancethebeer.com "Balance the Beer"] game.
+the [http://balancethebeer.com "Balance the Beer"] game._*
