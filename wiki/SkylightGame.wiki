@@ -7,6 +7,6 @@ See:
  * [SkylightGameDesign Skylight Game design]
 
 
-*_Note: this "default" initial game of the Skylight framework is what became
+*_Note: these initial game design notes of the Skylight1 framework is what became
 
 the [http://balancethebeer.com "Balance the Beer"] game._*
