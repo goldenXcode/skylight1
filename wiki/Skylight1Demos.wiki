@@ -5,5 +5,6 @@
 The following demos are available (more to come)
 
   * OpenGL 
-    * Barnstormer - a 3D OpenGL sample requires the following Skylight1 projects: SkylightOpenGL and SkylightUtil
+    * Barnstormer - a 3D OpenGL demo 
+       requires the following Skylight1 projects: Skylight1 OpenGL and Skylight1 Util
  
