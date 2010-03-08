@@ -1,0 +1,9 @@
+#Skylight1 API Demos and Samples
+
+=== Demos ===
+
+The following demos are available (more to come)
+
+  * OpenGL 
+    * Barnstormer - a 3D OpenGL sample requires the following Skylight1 projects: SkylightOpenGL and SkylightUtil
+ 
