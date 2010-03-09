@@ -6,5 +6,6 @@ The following demos are available (more to come)
 
   * OpenGL 
     * Barnstormer - a 3D OpenGL demo 
-       requires the following Skylight1 projects: Skylight1 OpenGL and Skylight1 Util
+       requires the following Skylight1 projects: skylight1opengl and skylight1util (for FPS util) subprojects.
+       [http://www.nycjava.net/JSPWiki/barnstormer-half-scrn.png]
  
