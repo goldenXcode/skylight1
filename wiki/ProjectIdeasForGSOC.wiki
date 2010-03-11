@@ -1,7 +1,11 @@
   * JAXB equivalent for Android
 
-  * Declarative action mappings addition to layout.xml
+  * Declarative action mappings addition to layout xml files or other xml files.
 
   * Benchmark application that tests all apis and hardware on all phones and reports to a central publicly available  site
+
+  * Improving test coverage
+
+  * Usability testing application (includes video and audio recording of users) - could require custom firmware
 
   * 
