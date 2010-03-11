@@ -1,0 +1,5 @@
+  * JAXB equivalent for Android
+
+  * Declarative action mappings addition to layout.xml
+
+  * 
