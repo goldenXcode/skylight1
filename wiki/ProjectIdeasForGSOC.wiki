@@ -2,4 +2,6 @@
 
   * Declarative action mappings addition to layout.xml
 
+  * Benchmark application that tests all apis and hardware on all phones and reports to a central publicly available  site
+
   * 
