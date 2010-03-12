@@ -9,3 +9,5 @@
   * Usability testing application (includes video and audio recording of users) - could require custom firmware
 
   * App Engine based Google Marketplace application for developers to monitor their Android Apps. including stats such downloads, ratings, and new reviews including translations. Provide Buzz, Twitter, and Facebook feeds. Optionally link in advertising stats as well.
+
+  * refactor and revitalize a 2.x version of Balance the Beer android application (currently over 125K downloads) with new features.
