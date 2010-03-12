@@ -1,6 +1,6 @@
   * JAXB equivalent for Android
 
-  * Declarative action mappings addition to layout xml files or other xml files.
+  * Declarative action mappings addition to layout xml files or using other xml files.
 
   * Benchmark application that tests all apis and hardware on all phones and reports to a central publicly available  site
 
