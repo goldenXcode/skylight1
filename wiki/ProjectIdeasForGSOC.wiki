@@ -8,4 +8,4 @@
 
   * Usability testing application (includes video and audio recording of users) - could require custom firmware
 
-  * 
+  * App Engine based Google Marketplace application for developers to monitor their Android Apps. including stats such downloads, ratings, and new reviews including translations. Provide Buzz, Twitter, and Facebook feeds. Optionally link in advertising stats as well.
