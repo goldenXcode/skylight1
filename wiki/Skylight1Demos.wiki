@@ -7,9 +7,9 @@ The following demos are available (more to come)
   * [http://code.google.com/p/skylight1/source/browse/#svn/trunk/Skylight1Demos/OpenGL/BarnstormerActivity/src/skylight1/opengl OpenGL]
     * Barnstormer - a 3D OpenGL demo (requires skylight1opengl and skylight1util (for FPS util) subprojects.
 
-  * [http://code.google.com/p/skylight1/source/browse/#svn/trunk/Skylight1Demos/FlickTest FlickTest] - an example of how to flick through views
+  * [http://code.google.com/p/skylight1/source/browse/#svn/trunk/Skylight1Demos/FlickTest FlickTest] - an example of how to flick left and right through views (displays edges of next view)
 
-  * Skylight1 Wallpaper - an example of a 2.1+ live wallpaper example featuring advanced fingerprint recognition technology
+  * Skylight1 Wallpaper - an example of a 2.1+ live wallpaper example featuring advanced fingerprint recognition technology (track fingerprints left on your phone)
 
 
 
