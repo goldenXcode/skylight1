@@ -9,7 +9,7 @@ The following demos are available (more to come)
 
   * [http://code.google.com/p/skylight1/source/browse/#svn/trunk/Skylight1Demos/FlickTest FlickTest] - an example of how to flick left and right through views (displays edges of next view)
 
-  * Skylight1 "Fingerprint" Wallpaper - live wallpaper example featuring advanced fingerprint recognition technology (track fingerprints left on your phone)
+  * Skylight1 "Fingerprint" Wallpaper - live wallpaper example featuring custom backgrounds and fingerprint that fades out.
 
 
 
