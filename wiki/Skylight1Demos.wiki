@@ -11,7 +11,9 @@ The following demos are available (more to come)
 
   * Skylight1 "Fingerprint" Wallpaper - live wallpaper example featuring custom backgrounds and fingerprint that fades out.
 
+.
 
+.
 
 Screenshots: Barnstormer, Flick Test, "Fingerprint Wallpaper"
 
