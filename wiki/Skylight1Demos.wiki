@@ -16,7 +16,7 @@ The following demos are available (more to come)
 
 .
 
-Screenshots: Barnstormer, Flick Test, "Fingerprint Wallpaper"
+Screenshots: Tanked, Barnstormer, Flick Test, "Fingerprint Wallpaper"
 
- [http://www.nycjava.net/JSPWiki/barnstormer-half-scrn.png     [http://www.nycjava.net/JSPWiki/tanked-half.png]]   [http://www.nycjava.net/JSPWiki/flick-scrn.png]   [http://www.nycjava.net/JSPWiki/fingerprint-scrn.png]
+ [http://www.nycjava.net/JSPWiki/barnstormer-half-scrn.png]     [http://www.nycjava.net/JSPWiki/tanked-half.png]   [http://www.nycjava.net/JSPWiki/flick-scrn.png]   [http://www.nycjava.net/JSPWiki/fingerprint-scrn.png]
  
