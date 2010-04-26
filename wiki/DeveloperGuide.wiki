@@ -31,4 +31,4 @@ Coding Guidelines:
 
 The Skylight1 open source project is open to all to participate in (submit patches, test, create derivative projects). The closed source project(s) are limited to those members who attend our meetings (in NYC).
 
-If in NYC, stop by a [http://meetup.com/nycjava NYC Java Meetup] or visit [http://nycjava.net] for more info.
+If in NYC, stop by a [http://nyc-gtug.org GTUG] meeting, the [http://meetup.com/nycjava NYC Java Meetup] or visit [http://nycjava.net] for more info.
