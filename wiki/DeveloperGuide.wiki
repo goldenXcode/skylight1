@@ -10,18 +10,8 @@ Prerequisites:
   * Install the ADT plug-in for Eclipse.
   * Install the a subversion plug-in for Eclipse (we recommend Subclipse).
 
-Some projects require a classpath variable called "ANDROID_LIB" to be set to the location of an android.jar file in your SDK directory.
-
-For example, if you installed the SDK to "/home/user/Desktop/android/android-sdk-linux_x86-1.6_r1/" the the variable should point to: "/home/user/Desktop/android/android-sdk-linux_x86-1.6_r1/platforms/android-2.1/android.jar". 
-
-You can set classpath variables in Eclipse by going to:
-Window menu -> Preferences -> Java -> Build Path -> Classpath Variables
-
-Note: some projects may require the Android NDK (only those with jni folders).
-
 
 To check out a project, open the SVN Repository view in Eclipse right click on a project (for demos drill down first to the project) then simply use default checkout..:  "check out as project..."
-
 
 
 Coding Guidelines:
@@ -31,4 +21,4 @@ Coding Guidelines:
 
 The Skylight1 open source project is open to all to participate in (submit patches, test, create derivative projects). The closed source project(s) are limited to those members who attend our meetings (in NYC).
 
-If in NYC, stop by a [http://nyc-gtug.org GTUG] meeting, the [http://meetup.com/nycjava NYC Java Meetup] or visit [http://nycjava.net] for more info.
+_*If in NYC, stop by a [http://nyc-gtug.org GTUG] meeting, the [http://meetup.com/nycjava NYC Java Meetup] or visit [http://nycjava.net] for more info.*_
