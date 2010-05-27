@@ -1,6 +1,10 @@
 #summary Notes for Android MarketApp
 #labels Phase-Requirements,marketapp
 
+= Other Project Links =
+<a href="http://spreadsheets.google.com/pub?key=0ArVkFagUZg7bdDd3Q3E0dm5qZi1kUi1mM0xfLUkwUXc&hl=en&output=html">Task List</a>
+
+
 = Introduction =
 
 The *MarketApp* is a stock market application for the Android platform.  In short, a <a href="http://finance.yahoo.com">Yahoo Finance</a> or <a href="http://finance.google.com">Google Finance</a> for Android.
