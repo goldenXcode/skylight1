@@ -3,7 +3,7 @@
 
 = Introduction =
 
-The *MarketApp* is a stock market application for the Android platform.  In short, a <a href="http://finance.google.com">Yahoo Finance</a> or <a href="finance.google.com">Google Finance</a> for Android.
+The *MarketApp* is a stock market application for the Android platform.  In short, a <a href="http://finance.yahoo.com">Yahoo Finance</a> or <a href="http://finance.google.com">Google Finance</a> for Android.
 
 = Watchlist =
 
@@ -35,7 +35,7 @@ The portfolio screen(s) will contain the same information that is on the Watchli
 <tr><td>INTC</td><td>100,000</td><td>22.82</td><td>5/26/2010</td></tr>
 <tr><td>GOOG</td><td>-250,000</td><td>502.12</td><td>5/2/2010</td></tr>
 </table>
-|| foo || bar||
+
 = Yahoo Prices =
 
 Equity pricing information can be obtained from Yahoo using a URL like the following:
