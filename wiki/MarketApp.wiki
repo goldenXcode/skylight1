@@ -3,7 +3,8 @@
 
 = Other Project Links =
 <a href="http://spreadsheets.google.com/pub?key=0ArVkFagUZg7bdDd3Q3E0dm5qZi1kUi1mM0xfLUkwUXc&hl=en&output=html">Task List</a><br/>
-<a href="http://picasaweb.google.com/mmellinger66/MarketApp#">Screen Mockups</a>
+<a href="http://picasaweb.google.com/mmellinger66/MarketApp#">Screen Mockups</a><br/>
+[MarketAppComponentNotes Detailed Component Design Notes]
 
 = Introduction =
 
