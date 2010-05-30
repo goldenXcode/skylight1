@@ -58,3 +58,7 @@ The fields used:<br/>
 "AAPL",244.00,243.50,130.91,272.46,+11.17%
 
 Symbol, ask, bid, 52 week low, 52 week high, % change from 200 day mavg<br/>
+
+== Misc Sources ==
+<a href="http://www.seangw.com/wordpress/index.php/2010/01/formatting-stock-data-from-yahoo-finance/">Comprehensive List of Yahoo Price Request Options</a><br/>
+<a href="http://answers.yahoo.com/question/index?qid=20060918121957AAZaIdi">Yahoo Answers</a>
