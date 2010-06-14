@@ -62,3 +62,17 @@ Symbol, ask, bid, 52 week low, 52 week high, % change from 200 day mavg<br/>
 == Misc Sources ==
 <a href="http://www.seangw.com/wordpress/index.php/2010/01/formatting-stock-data-from-yahoo-finance/">Comprehensive List of Yahoo Price Request Options</a><br/>
 <a href="http://answers.yahoo.com/question/index?qid=20060918121957AAZaIdi">Yahoo Answers</a>
+
+= Historical Yahoo Prices =
+
+Historical prices can be retrieved from Yahoo using the following URL:
+
+<a href="http://ichart.finance.yahoo.com/table.csv?s=AAPL&a=5&b=1&c=2010&d=05&e=17&f=2010&g=d">http://ichart.finance.yahoo.com/table.csv?s=AAPL&a=5&b=1&c=2010&d=05&e=17&f=2010&g=d</a>
+
+ * a = start month - 1
+ * b = start day
+ * c = start year
+ * d = end month  - 1
+ * e = end day
+ * f = end year
+ * g = d(aily),w(eekly), m(onthly)
