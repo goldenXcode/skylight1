@@ -2,6 +2,7 @@
 #labels Phase-Requirements,marketapp
 
 = Other Project Links =
+<a href="http://www.panix.com/~melling/a/marketapp-debug.apk">MarketApp apk</a><br/>
 <a href="http://spreadsheets.google.com/pub?key=0ArVkFagUZg7bdDd3Q3E0dm5qZi1kUi1mM0xfLUkwUXc&hl=en&output=html">Task List</a><br/>
 <a href="http://picasaweb.google.com/mmellinger66/MarketApp#">Screen Mockups</a><br/>
 [MarketAppComponentNotes Detailed Component Design Notes]
