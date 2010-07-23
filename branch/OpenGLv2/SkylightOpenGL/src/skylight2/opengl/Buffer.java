@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.Stack;
 
-public class GeometryGroup {
+public class Buffer {
 	static final String CORRECTLY_NESTED_EXCEPTION_MESSAGE =
 			"An existing geometry is still incomplete.  Nest geometries by calling startNestedGeometry() on the active geometry.";
 
@@ -28,7 +28,7 @@ public class GeometryGroup {
 
 	Stack geometryStack = new Stack();
 
-	public GeometryGroup(int aNumberOfVertices, int aIntsPerVertex) {
+	public Buffer(int aNumberOfVertices, int aIntsPerVertex) {
 		vertexDataAsArray = new int[aNumberOfVertices * aIntsPerVertex];
 	}
 

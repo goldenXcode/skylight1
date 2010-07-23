@@ -1,28 +1,34 @@
 package skylight2.opengl;
 
-import skylight2.opengl.TexturedNormaledGeometryGroup.IncompleteTriangleStripGeometry;
-import skylight2.opengl.TexturedNormaledGeometryGroup.IncompleteTrianglesGeometry;
+import javax.microedition.khronos.opengles.GL10;
+
+import skylight2.opengl.TexturedNormaledBuffer.IncompleteTriangleStripGeometry;
+import skylight2.opengl.TexturedNormaledBuffer.IncompleteTrianglesGeometry;
 
 public class TestTexturedNormaled {
+	private GL10 gL10 = new DummyGL10();
+
 	public void testTexturedNormaledGeometryGroup() {
-		TexturedNormaledGeometryGroup geometryGroup = new TexturedNormaledGeometryGroup(9 + 5);
+		TexturedNormaledBuffer buffer = new TexturedNormaledBuffer(9 + 5);
 		Geometry trianglesGeometry =
-				geometryGroup.startTrianglesGeometry().addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0)
+				buffer.startTrianglesGeometry().addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0)
 						.setTextures(0, 0, 0, 0, 0, 0).setNormals(0, 0, 0, 0, 0, 0, 0, 0, 0)
 						.addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0).setTextures(0, 0, 0, 0, 0, 0)
 						.setNormals(0, 0, 0, 0, 0, 0, 0, 0, 0).addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0).skipTextures()
 						.skipNormals().endGeometry();
+		trianglesGeometry.draw(gL10);
 		Geometry triangleStripGeometry =
-				geometryGroup.startTriangleStripGeometry().addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0)
+				buffer.startTriangleStripGeometry().addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0)
 						.setTextures(0, 0, 0, 0, 0, 0).setNormals(0, 0, 0, 0, 0, 0, 0, 0, 0).addTriangle(0, 0, 0)
 						.setTextures(0, 0).setNormals(0, 0, 0).addTriangle(0, 0, 0).skipTextures().skipNormals()
 						.endGeometry();
+		triangleStripGeometry.draw(gL10);
 	}
 
 	public void testNestedTexturedNormaledGeometryGroup() {
-		TexturedNormaledGeometryGroup geometryGroup = new TexturedNormaledGeometryGroup(9 + 5);
+		TexturedNormaledBuffer buffer = new TexturedNormaledBuffer(9 + 5);
 		final IncompleteTrianglesGeometry trianglePart =
-				geometryGroup.startTrianglesGeometry().addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0)
+				buffer.startTrianglesGeometry().addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0)
 						.setTextures(0, 0, 0, 0, 0, 0).setNormals(0, 0, 0, 0, 0, 0, 0, 0, 0);
 		Geometry nestedTrianglesGeometry =
 				trianglePart.startNestedGeometry().addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0).setTextures(0, 0, 0, 0, 0, 0)
@@ -32,9 +38,11 @@ public class TestTexturedNormaled {
 				trianglePart.addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0).setTextures(0, 0, 0, 0, 0, 0)
 						.setNormals(0, 0, 0, 0, 0, 0, 0, 0, 0).addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0).skipTextures()
 						.skipNormals().endGeometry();
+		nestedTrianglesGeometry.draw(gL10);
+		outerTrianglesGeometry.draw(gL10);
 
 		final IncompleteTriangleStripGeometry triangleStripPart =
-				geometryGroup.startTriangleStripGeometry().addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0)
+				buffer.startTriangleStripGeometry().addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0)
 						.setTextures(0, 0, 0, 0, 0, 0).setNormals(0, 0, 0, 0, 0, 0, 0, 0, 0);
 		Geometry nestedTriangleStripGeometry =
 				triangleStripPart.startNestedGeometry().addTriangle(0, 0, 0).setTextures(0, 0).setNormals(0, 0, 0)
@@ -42,5 +50,7 @@ public class TestTexturedNormaled {
 		Geometry triangleStripGeometry =
 				triangleStripPart.addTriangle(0, 0, 0).setTextures(0, 0).setNormals(0, 0, 0).addTriangle(0, 0, 0)
 						.skipTextures().skipNormals().endGeometry();
+		nestedTriangleStripGeometry.draw(gL10);
+		triangleStripGeometry.draw(gL10);
 	}
 }

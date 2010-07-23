@@ -2,7 +2,7 @@ package skylight2.opengl;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class TexturedNormaledGeometryGroup extends GeometryGroup {
+public class TexturedNormaledBuffer extends Buffer {
 	static final int DATA_ELEMENTS_PER_TRIANGLE =
 			VERTICES_PER_TRIANGLE * (MODEL_COORDINATES_PER_VERTEX + TEXTURE_COORDINATES_PER_VERTEX + NORMAL_COMPONENTS_PER_VERTEX);
 
@@ -42,18 +42,19 @@ public class TexturedNormaledGeometryGroup extends GeometryGroup {
 		}
 
 		public Geometry endGeometry() {
-			return (Geometry) geometryStack.pop();
+			final Geometry geometry = (Geometry) geometryStack.pop();
+			geometry.setVertexDataLength(geometry.getVertexDataStartOffset() - currentVertexDataIndex);
+			return geometry;
 		}
 
 		public IncompleteTrianglesGeometry startNestedGeometry() {
-			geometryStack.push(new Geometry(TexturedNormaledGeometryGroup.this, currentVertexDataIndex, GL10.GL_TRIANGLES));
+			geometryStack.push(new Geometry(TexturedNormaledBuffer.this, currentVertexDataIndex, GL10.GL_TRIANGLES));
 			return incompleteTrianglesGeometry;
 		}
 	}
 
 	public class IncompleteTrianglesGeometryTex {
 		public IncompleteTrianglesGeometryNor setTextures(int aU1, int aV1, int aU2, int aV2, int aU3, int aV3) {
-
 			vertexDataAsArray[currentVertexDataIndex++] = (int) (aU1 * (1 << 16));
 			vertexDataAsArray[currentVertexDataIndex++] = (int) (aV1 * (1 << 16));
 
@@ -67,7 +68,6 @@ public class TexturedNormaledGeometryGroup extends GeometryGroup {
 		}
 
 		public IncompleteTrianglesGeometryNor skipTextures() {
-
 			currentVertexDataIndex += VERTICES_PER_TRIANGLE * TEXTURE_COORDINATES_PER_VERTEX;
 
 			return incompleteTrianglesGeometryNor;
@@ -77,7 +77,6 @@ public class TexturedNormaledGeometryGroup extends GeometryGroup {
 	public class IncompleteTrianglesGeometryNor {
 		public IncompleteTrianglesGeometry setNormals(float aNormalX1, float aNormalY1, float aNormalZ1, float aNormalX2, float aNormalY2, float aNormalZ2,
 				float aNormalX3, float aNormalY3, float aNormalZ3) {
-
 			vertexDataAsArray[currentVertexDataIndex++] = (int) (aNormalX1 * (1 << 16));
 			vertexDataAsArray[currentVertexDataIndex++] = (int) (aNormalY1 * (1 << 16));
 			vertexDataAsArray[currentVertexDataIndex++] = (int) (aNormalZ1 * (1 << 16));
@@ -206,11 +205,13 @@ public class TexturedNormaledGeometryGroup extends GeometryGroup {
 		}
 
 		public Geometry endGeometry() {
-			return (Geometry) geometryStack.pop();
+			final Geometry geometry = (Geometry) geometryStack.pop();
+			geometry.setVertexDataLength(geometry.getVertexDataStartOffset() - currentVertexDataIndex);
+			return geometry;
 		}
 
 		public IncompleteTriangleStripGeometry startNestedGeometry() {
-			geometryStack.push(new Geometry(TexturedNormaledGeometryGroup.this, currentVertexDataIndex, GL10.GL_TRIANGLE_STRIP));
+			geometryStack.push(new Geometry(TexturedNormaledBuffer.this, currentVertexDataIndex, GL10.GL_TRIANGLE_STRIP));
 			return incompleteTriangleStripGeometry;
 		}
 	}
@@ -264,7 +265,7 @@ public class TexturedNormaledGeometryGroup extends GeometryGroup {
 
 	private final IncompleteTriangleStripGeometryNor incompleteTriangleStripGeometryNor = new IncompleteTriangleStripGeometryNor();
 
-	public TexturedNormaledGeometryGroup(int aNumberOfVertices) {
+	public TexturedNormaledBuffer(int aNumberOfVertices) {
 		super(aNumberOfVertices, MODEL_COORDINATES_PER_VERTEX + TEXTURE_COORDINATES_PER_VERTEX + NORMAL_COMPONENTS_PER_VERTEX);
 	}
 
