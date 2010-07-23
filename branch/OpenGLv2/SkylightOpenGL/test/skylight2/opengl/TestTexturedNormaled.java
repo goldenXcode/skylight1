@@ -1,12 +1,9 @@
 package skylight2.opengl;
 
-import org.junit.Test;
-
 import skylight2.opengl.TexturedNormaledGeometryGroup.IncompleteTriangleStripGeometry;
 import skylight2.opengl.TexturedNormaledGeometryGroup.IncompleteTrianglesGeometry;
 
 public class TestTexturedNormaled {
-	@Test
 	public void testTexturedNormaledGeometryGroup() {
 		TexturedNormaledGeometryGroup geometryGroup = new TexturedNormaledGeometryGroup(9 + 5);
 		Geometry trianglesGeometry =
@@ -22,7 +19,6 @@ public class TestTexturedNormaled {
 						.endGeometry();
 	}
 
-	@Test
 	public void testNestedTexturedNormaledGeometryGroup() {
 		TexturedNormaledGeometryGroup geometryGroup = new TexturedNormaledGeometryGroup(9 + 5);
 		final IncompleteTrianglesGeometry trianglePart =

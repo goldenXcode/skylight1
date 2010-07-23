@@ -1,7 +1,6 @@
 package skylight2.opengl;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.util.Stack;
 
@@ -9,7 +8,7 @@ public class GeometryGroup {
 	static final String CORRECTLY_NESTED_EXCEPTION_MESSAGE =
 			"An existing geometry is still incomplete.  Nest geometries by calling startNestedGeometry() on the active geometry.";
 
-	static final int BYTES_PER_INTEGER = Integer.SIZE / Byte.SIZE;
+	static final int BYTES_PER_INTEGER = Sizes.INTEGER_BIT_SIZE / Sizes.BYTE_BIT_SIZE;
 
 	static final int MODEL_COORDINATES_PER_VERTEX = 3;
 
@@ -27,7 +26,7 @@ public class GeometryGroup {
 
 	IntBuffer vertexDataAsBuffer;
 
-	Stack<Geometry> geometryStack = new Stack<Geometry>();
+	Stack geometryStack = new Stack();
 
 	public GeometryGroup(int aNumberOfVertices, int aIntsPerVertex) {
 		vertexDataAsArray = new int[aNumberOfVertices * aIntsPerVertex];
@@ -49,8 +48,15 @@ public class GeometryGroup {
 	 */
 	private void createVertexDataAsBuffer() {
 		// create a direct byte buffer in native byte order
-		ByteBuffer byteBuffer = ByteBuffer.allocateDirect(vertexDataAsArray.length * Float.SIZE / Byte.SIZE);
-		byteBuffer.order(ByteOrder.nativeOrder());
+		ByteBuffer byteBuffer = ByteBuffer.allocateDirect(vertexDataAsArray.length * Sizes.FLOAT_BIT_SIZE / Sizes.BYTE_BIT_SIZE);
+		try {
+			Class.forName("java.nio.ByteOrder");
+			// TODO use reflection to run the next line... JSR 239 doesn't support byte order
+			// but android requires it!
+			// byteBuffer.order(ByteOrder.nativeOrder());
+		} catch (ClassNotFoundException e) {
+			// if ByteOrder does not exist, then
+		}
 		vertexDataAsBuffer = byteBuffer.asIntBuffer();
 	}
 

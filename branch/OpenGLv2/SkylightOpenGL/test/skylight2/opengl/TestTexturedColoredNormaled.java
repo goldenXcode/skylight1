@@ -1,9 +1,7 @@
 package skylight2.opengl;
 
-import org.junit.Test;
 
 public class TestTexturedColoredNormaled {
-	@Test
 	public void testTexturedColoredNormaledGeometryGroup() {
 		TexturedColoredNormaledGeometryGroup geometryGroup = new TexturedColoredNormaledGeometryGroup();
 		Geometry trianglesGeometry =
@@ -21,7 +19,6 @@ public class TestTexturedColoredNormaled {
 						.skipNormals().endGeometry();
 	}
 
-	@Test
 	public void testNestedTexturedColoredNormaledGeometryGroup() {
 		// TODO
 	}
