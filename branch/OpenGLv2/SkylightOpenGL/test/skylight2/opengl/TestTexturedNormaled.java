@@ -26,7 +26,7 @@ public class TestTexturedNormaled {
 	}
 
 	public void testNestedTexturedNormaledGeometryGroup() {
-		TexturedNormaledBuffer buffer = new TexturedNormaledBuffer(9 + 5);
+		TexturedNormaledBuffer buffer = new TexturedNormaledBuffer(7 + 5);
 		final IncompleteTrianglesGeometry trianglePart =
 				buffer.startTrianglesGeometry().addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0)
 						.setTextures(0, 0, 0, 0, 0, 0).setNormals(0, 0, 0, 0, 0, 0, 0, 0, 0);
