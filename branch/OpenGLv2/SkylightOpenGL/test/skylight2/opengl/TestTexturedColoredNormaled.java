@@ -3,16 +3,16 @@ package skylight2.opengl;
 
 public class TestTexturedColoredNormaled {
 	public void testTexturedColoredNormaledGeometryGroup() {
-		TexturedColoredNormaledGeometryGroup geometryGroup = new TexturedColoredNormaledGeometryGroup();
+		TexturedColoredNormaledBuffer buffer = new TexturedColoredNormaledBuffer(6);
 		Geometry trianglesGeometry =
-				geometryGroup.startTrianglesGeometry().addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0)
+				buffer.startTrianglesGeometry().addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0)
 						.setTextures(0, 0, 0, 0, 0, 0).setColors(0, 0, 0, 0, 0, 0, 0, 0, 0)
 						.setNormals(0, 0, 0, 0, 0, 0, 0, 0, 0).addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0)
 						.setTextures(0, 0, 0, 0, 0, 0).setColors(0, 0, 0, 0, 0, 0, 0, 0, 0)
 						.setNormals(0, 0, 0, 0, 0, 0, 0, 0, 0).addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0).skipTextures()
 						.skipColors().skipNormals().endGeometry();
 		Geometry triangleStripGeometry =
-				geometryGroup.startTriangleStripGeometry().addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0)
+				buffer.startTriangleStripGeometry().addTriangle(0, 0, 0, 0, 0, 0, 0, 0, 0)
 						.setTextures(0, 0, 0, 0, 0, 0).setColors(0, 0, 0, 0, 0, 0, 0, 0, 0)
 						.setNormals(0, 0, 0, 0, 0, 0, 0, 0, 0).addTriangle(0, 0, 0).setTextures(0, 0)
 						.setColors(0, 0, 0).setNormals(0, 0, 0).addTriangle(0, 0, 0).skipTextures().skipColors()

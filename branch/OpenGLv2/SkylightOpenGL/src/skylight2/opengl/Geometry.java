@@ -3,7 +3,7 @@ package skylight2.opengl;
 import javax.microedition.khronos.opengles.GL10;
 
 public class Geometry {
-	final Buffer buffer;
+	final GeometryBuffer geometryBuffer;
 
 	final int vertexDataStartOffset;
 
@@ -11,12 +11,12 @@ public class Geometry {
 
 	int vertexDataLength;
 
-	public Geometry(final Buffer aBuffer, final int aVertexDataStartOffset, final int aRenderingMode) {
-		buffer = aBuffer;
+	public Geometry(final GeometryBuffer aGeometryBuffer, final int aVertexDataStartOffset, final int aRenderingMode) {
+		geometryBuffer = aGeometryBuffer;
 		vertexDataStartOffset = aVertexDataStartOffset;
 		renderingMode = aRenderingMode;
 	}
-
+	
 	public void draw(GL10 aGL10) {
 		aGL10.glDrawArrays(renderingMode, vertexDataStartOffset, vertexDataLength);
 	}
