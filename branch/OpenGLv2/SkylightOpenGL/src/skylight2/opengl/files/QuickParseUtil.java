@@ -68,12 +68,13 @@ public class QuickParseUtil {
 
 	private final static int[][] INTEGER_DECIMAL_VALUES = new int[4][10];
 
-	private final static int[] POWERS_OF_TEN = new int[] { 0, 10, 100, 1000 };
+	private final static int[] POWERS_OF_TEN = new int[] { 1, 10, 100, 1000 };
 
 	static {
 		for (int decimalPlace = 0; decimalPlace < INTEGER_DECIMAL_VALUES.length; decimalPlace++) {
 			for (int decimalValue = 0; decimalValue < 10; decimalValue++) {
 				INTEGER_DECIMAL_VALUES[decimalPlace][decimalValue] = POWERS_OF_TEN[decimalPlace] * decimalValue;
+//				System.out.println("10^" + decimalPlace + "x" + decimalValue + "=" + INTEGER_DECIMAL_VALUES[decimalPlace][decimalValue]);
 			}
 		}
 	}
@@ -94,6 +95,7 @@ public class QuickParseUtil {
 		for (int i = stringLength - 1; i >= startOfDigits; i--) {
 			decimalPlace++;
 			result += INTEGER_DECIMAL_VALUES[decimalPlace][aStringRepresentationOfAnInteger.charAt(i) - '0'];
+//			System.out.println("" + result + ":" + decimalPlace + ", " + aStringRepresentationOfAnInteger.charAt(i));
 		}
 		return sign * result;
 	}

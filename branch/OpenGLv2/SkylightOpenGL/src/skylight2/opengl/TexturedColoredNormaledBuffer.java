@@ -46,7 +46,8 @@ public class TexturedColoredNormaledBuffer extends GeometryBuffer {
 
 		public Geometry endGeometry() {
 			final Geometry geometry = (Geometry) geometryStack.pop();
-			geometry.setVertexDataLength(currentVertexDataIndex - geometry.getVertexDataStartOffset());
+			geometry.setVertexDataLength((currentVertexDataIndex - geometry.getVertexDataStartOffset())
+					/ (MODEL_COORDINATES_PER_VERTEX + TEXTURE_COORDINATES_PER_VERTEX));
 			return geometry;
 		}
 
@@ -259,7 +260,8 @@ public class TexturedColoredNormaledBuffer extends GeometryBuffer {
 
 		public Geometry endGeometry() {
 			final Geometry geometry = (Geometry) geometryStack.pop();
-			geometry.setVertexDataLength(currentVertexDataIndex - geometry.getVertexDataStartOffset());
+			geometry.setVertexDataLength((currentVertexDataIndex - geometry.getVertexDataStartOffset())
+					/ (MODEL_COORDINATES_PER_VERTEX + TEXTURE_COORDINATES_PER_VERTEX));
 			return geometry;
 		}
 

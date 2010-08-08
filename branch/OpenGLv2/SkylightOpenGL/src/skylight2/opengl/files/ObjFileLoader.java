@@ -87,39 +87,60 @@ public class ObjFileLoader {
 		final InputStreamReader br = new InputStreamReader(anInputStream);
 		String[] line;
 		while ((line = readLine(br)) != null) {
-			if (line[0].startsWith("v ")) {
+//			System.out.println(line[0]);
+			// if the line was blank there will be no parts to it
+			if (line[0] == null) {
+				continue;
+			}
+
+			if (line[0].equals("v")) {
 				modelCoordinates.addElement(new ModelCoordinates(QuickParseUtil.parseFloat(line[1]), QuickParseUtil.parseFloat(line[2]), QuickParseUtil
 						.parseFloat(line[3])));
-			} else if (line[0].startsWith("vt ")) {
+			} else if (line[0].equals("vt")) {
 				texturesCoordinates.addElement(new TextureCoordinates(QuickParseUtil.parseFloat(line[1]), 1f - QuickParseUtil.parseFloat(line[2])));
-			} else if (line[0].startsWith("vn ")) {
+			} else if (line[0].equals("vn")) {
 				normals.addElement(new Normal(QuickParseUtil.parseFloat(line[1]), QuickParseUtil.parseFloat(line[2]), QuickParseUtil.parseFloat(line[3])));
-			} else if (line[0].startsWith("f ")) {
+			} else if (line[0].equals("f")) {
+//				System.out.println(line[0] + ";" + line[1] + ";" + line[2] + ";" + line[1]);
+//				System.out.println(line[0] + ":" + QuickParseUtil.parseInteger(line[1]) + " " + QuickParseUtil.parseInteger(line[2]) + " "
+//						+ QuickParseUtil.parseInteger(line[1]));
+//				System.out.println(modelCoordinates.size() + "," + texturesCoordinates.size() + "," + normals.size());
 				final Vertex v1 =
 						new Vertex((ModelCoordinates) modelCoordinates.elementAt(QuickParseUtil.parseInteger(line[1]) - 1), (TextureCoordinates) texturesCoordinates
 								.elementAt(QuickParseUtil.parseInteger(line[2]) - 1), (Normal) normals.elementAt(QuickParseUtil.parseInteger(line[3]) - 1));
 				final Vertex v2 =
-						new Vertex((ModelCoordinates) modelCoordinates.elementAt(QuickParseUtil.parseInteger(line[1]) - 1), (TextureCoordinates) texturesCoordinates
-								.elementAt(QuickParseUtil.parseInteger(line[2]) - 1), (Normal) normals.elementAt(QuickParseUtil.parseInteger(line[3]) - 1));
+						new Vertex((ModelCoordinates) modelCoordinates.elementAt(QuickParseUtil.parseInteger(line[4]) - 1), (TextureCoordinates) texturesCoordinates
+								.elementAt(QuickParseUtil.parseInteger(line[5]) - 1), (Normal) normals.elementAt(QuickParseUtil.parseInteger(line[6]) - 1));
 				final Vertex v3 =
-						new Vertex((ModelCoordinates) modelCoordinates.elementAt(QuickParseUtil.parseInteger(line[1]) - 1), (TextureCoordinates) texturesCoordinates
-								.elementAt(QuickParseUtil.parseInteger(line[2]) - 1), (Normal) normals.elementAt(QuickParseUtil.parseInteger(line[3]) - 1));
+						new Vertex((ModelCoordinates) modelCoordinates.elementAt(QuickParseUtil.parseInteger(line[7]) - 1), (TextureCoordinates) texturesCoordinates
+								.elementAt(QuickParseUtil.parseInteger(line[8]) - 1), (Normal) normals.elementAt(QuickParseUtil.parseInteger(line[9]) - 1));
 				faces.addElement(new Face(v1, v2, v3));
 			}
 		}
 	}
 
 	private String[] readLine(Reader aReader) throws IOException {
-		final String[] result = new String[4];
+		final String[] result = new String[10];
 		final StringBuffer linePart = new StringBuffer();
 		int partIndex = 0;
 		int c;
-		while ((c = aReader.read()) != EOF && c != '\n') {
-			if ((char) c == ',' || (char) c == ' ') {
+		while (true) {
+			c = aReader.read();
+//			System.out.println(c);
+			if ((char) c == ',' || (char) c == '/' || (char) c == ' ' || (char) c == '\n' || (char) c == '\r' || c == EOF) {
 				result[partIndex++] = linePart.toString();
+				linePart.setLength(0);
+				if (partIndex >= result.length || (char) c == '\n' || (char) c == '\r' || c == EOF) {
+					break;
+				}
 			} else {
 				linePart.append((char) c);
 			}
+		}
+
+		// if the end of the line was reached, and no line was read, then return null
+		if (c == EOF && partIndex == 1 && result[0].equals("")) {
+			return null;
 		}
 
 		return result;

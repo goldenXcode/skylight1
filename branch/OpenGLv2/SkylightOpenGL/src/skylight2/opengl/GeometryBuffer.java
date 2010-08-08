@@ -28,6 +28,8 @@ public abstract class GeometryBuffer {
 
 	int currentVertexDataIndex;
 
+	int nextVertexDataIndex;
+
 	protected IntBuffer vertexDataAsBuffer;
 
 	/*
@@ -87,7 +89,7 @@ public abstract class GeometryBuffer {
 	 */
 	private void createVertexDataAsBuffer() {
 		// create a direct byte geometryBuffer in native byte order
-		ByteBuffer byteBuffer = ByteBuffer.allocateDirect(vertexDataAsArray.length * Sizes.FLOAT_BIT_SIZE / Sizes.BYTE_BIT_SIZE);
+		ByteBuffer byteBuffer = ByteBuffer.allocateDirect(vertexDataAsArray.length * Sizes.INTEGER_BIT_SIZE / Sizes.BYTE_BIT_SIZE);
 		try {
 			Class.forName("java.nio.ByteOrder");
 			// TODO use reflection to run the next line... JSR 239 doesn't support byte order
