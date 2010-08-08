@@ -4,7 +4,7 @@
  */
 package com.sun.jsr239.wtksamples.cube;
 
-import java.nio.ByteBuffer;
+import java.io.InputStream;
 import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLContext;
@@ -15,46 +15,11 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
 import skylight2.opengl.Geometry;
 import skylight2.opengl.ModelBuffer;
+import skylight2.opengl.TexturedNormaledBuffer;
+import skylight2.opengl.files.ObjFileLoader;
 
 class CubeCanvas extends GameCanvas implements Runnable {
 
-    private static final byte[] s_cubeVertices = {
-        -10, 10, 10, 10, -10, 10, 10, 10, 10, -10, -10, 10,
-        -10, 10, -10, 10, -10, -10, 10, 10, -10, -10, -10, -10,
-        -10, -10, 10, 10, -10, -10, 10, -10, 10, -10, -10, -10,
-        -10, 10, 10, 10, 10, -10, 10, 10, 10, -10, 10, -10,
-        10, -10, 10, 10, 10, -10, 10, 10, 10, 10, -10, -10,
-        -10, -10, 10, -10, 10, -10, -10, 10, 10, -10, -10, -10
-    };
-    private static final byte[] s_cubeColors = {
-        (byte) 40, (byte) 80, (byte) 160, (byte) 255, (byte) 40, (byte) 80, (byte) 160, (byte) 255,
-        (byte) 40, (byte) 80, (byte) 160, (byte) 255, (byte) 40, (byte) 80, (byte) 160, (byte) 255,
-        (byte) 40, (byte) 80, (byte) 160, (byte) 255, (byte) 40, (byte) 80, (byte) 160, (byte) 255,
-        (byte) 40, (byte) 80, (byte) 160, (byte) 255, (byte) 40, (byte) 80, (byte) 160, (byte) 255,
-        (byte) 128, (byte) 128, (byte) 128, (byte) 255, (byte) 128, (byte) 128, (byte) 128, (byte) 255,
-        (byte) 128, (byte) 128, (byte) 128, (byte) 255, (byte) 128, (byte) 128, (byte) 128, (byte) 255,
-        (byte) 128, (byte) 128, (byte) 128, (byte) 255, (byte) 128, (byte) 128, (byte) 128, (byte) 255,
-        (byte) 128, (byte) 128, (byte) 128, (byte) 255, (byte) 128, (byte) 128, (byte) 128, (byte) 255,
-        (byte) 255, (byte) 110, (byte) 10, (byte) 255, (byte) 255, (byte) 110, (byte) 10, (byte) 255,
-        (byte) 255, (byte) 110, (byte) 10, (byte) 255, (byte) 255, (byte) 110, (byte) 10, (byte) 255,
-        (byte) 255, (byte) 70, (byte) 60, (byte) 255, (byte) 255, (byte) 70, (byte) 60, (byte) 255,
-        (byte) 255, (byte) 70, (byte) 60, (byte) 255, (byte) 255, (byte) 70, (byte) 60, (byte) 255
-    };
-    private static final byte[] s_cubeIndices = {
-        0, 3, 1, 2, 0, 1, /* front  */
-        6, 5, 4, 5, 7, 4, /* back   */
-        8, 11, 9, 10, 8, 9, /* top    */
-        15, 12, 13, 12, 14, 13, /* bottom */
-        16, 19, 17, 18, 16, 17, /* right  */
-        23, 20, 21, 20, 22, 21 /* left   */};
-    private static final byte[] s_cubeNormals = {
-        0, 0, 127, 0, 0, 127, 0, 0, 127, 0, 0, 127,
-        0, 0, -128, 0, 0, -128, 0, 0, -128, 0, 0, -128,
-        0, -128, 0, 0, -128, 0, 0, -128, 0, 0, -128, 0,
-        0, 127, 0, 0, 127, 0, 0, 127, 0, 0, 127, 0,
-        127, 0, 0, 127, 0, 0, 127, 0, 0, 127, 0, 0,
-        -128, 0, 0, -128, 0, 0, -128, 0, 0, -128, 0, 0
-    };
     boolean initialized = false;
     int frame = 0;
     float time = 0.0f;
@@ -68,12 +33,10 @@ class CubeCanvas extends GameCanvas implements Runnable {
     EGLDisplay eglDisplay;
     EGLSurface eglWindowSurface;
     EGLContext eglContext;
-    ByteBuffer cubeVertices;
-    ByteBuffer cubeColors;
-    ByteBuffer cubeNormals;
-    ByteBuffer cubeIndices;
     ModelBuffer geometryBuffer;
     Geometry geometry;
+    TexturedNormaledBuffer buffer2;
+    Geometry sphinx;
 
     public CubeCanvas(Cube cube) {
         super(true);
@@ -83,8 +46,19 @@ class CubeCanvas extends GameCanvas implements Runnable {
         this.width = getWidth();
         this.height = getHeight();
 
+        buffer2 = new TexturedNormaledBuffer(924);
+        try {
+            InputStream is = CubeCanvas.class.getResourceAsStream("sphinx_scaled.obj");
+            ObjFileLoader objFileLoader = new ObjFileLoader(is);
+            sphinx = objFileLoader.createGeometry(buffer2);
+//            sphinx = buffer2.startTrianglesGeometry().addTriangle(0, 10, 10, 10, 0, 5, 0, 0, 0).setTextures(0, 1, 1, 1, 0, 1).setNormals(0, 0, 1, 0, 0, 1, 0, 0, 1).addTriangle(0, 10, 10, -10, 0, 5, 0, 0, 0).setTextures(0, 1, 1, 1, 0, 1).setNormals(0, 0, 1, 0, 0, 1, 0, 0, 1).endGeometry();
+//            sphinx = buffer2.startTrianglesGeometry().addTriangle(0, 10, 10, 10, 0, 5, 0, 0, 0).setTextures(0, 1, 1, 1, 0, 1).setNormals(0, 0, 1, 0, 0, 1, 0, 0, 1).endGeometry();
+            buffer2.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
         geometryBuffer = new ModelBuffer(3);
-
         geometry = geometryBuffer.startTrianglesGeometry().addTriangle(0, 10, 10, 10, 0, 5, 0, 0, 0).endGeometry();
         geometryBuffer.flush();
     }
@@ -135,23 +109,6 @@ class CubeCanvas extends GameCanvas implements Runnable {
 
         this.eglWindowSurface = egl.eglCreateWindowSurface(eglDisplay, eglConfig, g, null);
 
-        // Initialize data Buffers
-        this.cubeVertices = ByteBuffer.allocateDirect(s_cubeVertices.length);
-        cubeVertices.put(s_cubeVertices);
-        cubeVertices.rewind();
-
-        this.cubeColors = ByteBuffer.allocateDirect(s_cubeColors.length);
-        cubeColors.put(s_cubeColors);
-        cubeColors.rewind();
-
-        this.cubeNormals = ByteBuffer.allocateDirect(s_cubeNormals.length);
-        cubeNormals.put(s_cubeNormals);
-        cubeNormals.rewind();
-
-        this.cubeIndices = ByteBuffer.allocateDirect(s_cubeIndices.length);
-        cubeIndices.put(s_cubeIndices);
-        cubeIndices.rewind();
-
         this.initialized = true;
     }
 
@@ -184,22 +141,23 @@ class CubeCanvas extends GameCanvas implements Runnable {
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         gl.glLoadIdentity();
 
-//        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_POSITION, light_position, 0);
-//        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_AMBIENT, light_ambient, 0);
-//        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_DIFFUSE, light_diffuse, 0);
+        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_POSITION, light_position, 0);
+        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_AMBIENT, light_ambient, 0);
+        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_DIFFUSE, light_diffuse, 0);
 //        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_SPECULAR, zero_vec4, 0);
 //        gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_SPECULAR, material_spec, 0);
 
-//        gl.glEnable(GL10.GL_NORMALIZE);
-//        gl.glEnable(GL10.GL_LIGHTING);
-//        gl.glEnable(GL10.GL_LIGHT0);
+        gl.glEnable(GL10.GL_DEPTH_TEST);
+        gl.glEnable(GL10.GL_NORMALIZE);
+        gl.glEnable(GL10.GL_LIGHTING);
+        gl.glEnable(GL10.GL_LIGHT0);
 //        gl.glEnable(GL10.GL_COLOR_MATERIAL);
-//        gl.glEnable(GL10.GL_CULL_FACE);
+        gl.glEnable(GL10.GL_CULL_FACE);
 
-//        gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_FASTEST);
+        gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_FASTEST);
 
-//        gl.glShadeModel(GL10.GL_SMOOTH);
-//        gl.glDisable(GL10.GL_DITHER);
+        gl.glShadeModel(GL10.GL_SMOOTH);
+        gl.glDisable(GL10.GL_DITHER);
 
         // Clear background to blue
         gl.glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
@@ -211,7 +169,7 @@ class CubeCanvas extends GameCanvas implements Runnable {
         gl.glMatrixMode(GL10.GL_PROJECTION);
         gl.glLoadIdentity();
 
-        perspective(90.f, aspect, 0.1f, 100.f);
+        perspective(90.f, aspect, 0.1f, 1000.f);
 
         gl.glFinish();
     }
@@ -240,7 +198,7 @@ class CubeCanvas extends GameCanvas implements Runnable {
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         gl.glLoadIdentity();
 
-        gl.glTranslatef(0.f, 0.f, -30.f);
+        gl.glTranslatef(0.f, 0.f, -100.f);
         gl.glRotatef((float) (time * 29.77f), 1.0f, 2.0f, 0.0f);
         gl.glRotatef((float) (time * 22.311f), -0.1f, 0.0f, -5.0f);
 
@@ -251,17 +209,17 @@ class CubeCanvas extends GameCanvas implements Runnable {
 //        gl.glDrawElements(GL10.GL_TRIANGLES, 6 * 6, GL10.GL_UNSIGNED_BYTE, cubeIndices);
 
         // Tim's stuff
-        geometryBuffer.enable(gl);
-        gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+//        gl.glColor4f(0, 0, 1, 1);
+//        geometryBuffer.enable(gl);
+//        geometry.draw(gl);
+//        geometryBuffer.disable(gl);
+
+        gl.glColor4f(1, 1, 1, 1);
+        buffer2.enable(gl);
         gl.glDisableClientState(GL10.GL_NORMAL_ARRAY);
-        gl.glDisableClientState(GL10.GL_COLOR_ARRAY);
-//        gl.glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
-        geometry.draw(gl);
-        
-        gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
         gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-        gl.glDisableClientState(GL10.GL_NORMAL_ARRAY);
-        gl.glDisableClientState(GL10.GL_COLOR_ARRAY);
+        sphinx.draw(gl);
+        buffer2.disable(gl);
 
         gl.glFinish();
 
