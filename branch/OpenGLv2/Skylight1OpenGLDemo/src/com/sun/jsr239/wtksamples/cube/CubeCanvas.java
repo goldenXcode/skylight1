@@ -6,8 +6,6 @@ package com.sun.jsr239.wtksamples.cube;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
 import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLContext;
@@ -21,6 +19,7 @@ import skylight2.opengl.Geometry;
 import skylight2.opengl.ModelBuffer;
 import skylight2.opengl.TexturedNormaledBuffer;
 import skylight2.opengl.files.ObjFileLoader;
+import skylight2.opengl.Texture;
 
 class CubeCanvas extends GameCanvas implements Runnable {
 
@@ -43,6 +42,7 @@ class CubeCanvas extends GameCanvas implements Runnable {
     Geometry sphinx;
     Image sphinxTextureImage;
     int[] rgbData;
+    Texture sphinxTexture;
 
     public CubeCanvas(Cube cube) {
         super(true);
@@ -58,56 +58,22 @@ class CubeCanvas extends GameCanvas implements Runnable {
             ObjFileLoader objFileLoader = new ObjFileLoader(is);
             sphinx = objFileLoader.createGeometry(buffer2);
 //            sphinx = buffer2.startTrianglesGeometry().addTriangle(0, 10, 10, 10, 0, 5, 0, 0, 0).setTextures(0, 1, 1, 1, 0, 1).setNormals(0, 0, 1, 0, 0, 1, 0, 0, 1).addTriangle(0, 10, 10, -10, 0, 5, 0, 0, 0).setTextures(0, 1, 1, 1, 0, 1).setNormals(0, 0, 1, 0, 0, 1, 0, 0, 1).endGeometry();
-//            sphinx = buffer2.startTrianglesGeometry().addTriangle(0, 10, 10, 10, 0, 5, 0, 0, 0).setTextures(0, 1, 1, 1, 0, 1).setNormals(0, 0, 1, 0, 0, 1, 0, 0, 1).endGeometry();
             buffer2.flush();
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
         }
-        geometryBuffer = new ModelBuffer(3);
-        geometry = geometryBuffer.startTrianglesGeometry().addTriangle(0, 10, 10, 10, 0, 5, 0, 0, 0).endGeometry();
-        geometryBuffer.flush();
 
-        InputStream sphinxTextureInputStream = CubeCanvas.class.getResourceAsStream("sphinx.png");
+        final InputStream sphinxTextureInputStream = CubeCanvas.class.getResourceAsStream("sphinx.png");
         try {
             sphinxTextureImage = Image.createImage(sphinxTextureInputStream);
             rgbData = new int[sphinxTextureImage.getWidth() * sphinxTextureImage.getHeight()];
             sphinxTextureImage.getRGB(rgbData, 0, sphinxTextureImage.getWidth(), 0, 0, sphinxTextureImage.getWidth(), sphinxTextureImage.getHeight());
+            Texture.swapByteOrder(rgbData);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
-    }
-
-    int textureId;
-
-    private void generateTexture() {
-        if (textureId != 0) {
-            return;
-        }
-        int results[] = new int[2];
-        gl.glGetIntegerv(GL10.GL_MAX_TEXTURE_UNITS, results, 0);
-        gl.glGetIntegerv(GL10.GL_MAX_TEXTURE_SIZE, results, 1);
-        System.out.println("available texture units " + results[0] + ", max side " + results[1]);
-
-        // generate a texture
-        final int[] textures = new int[1];
-        gl.glGenTextures(textures.length, textures, 0);
-        textureId = textures[0];
-        System.out.println("texture id = " + textureId);
-        gl.glBindTexture(GL10.GL_TEXTURE_2D, textureId);
-
-        // swap the byte ordering from MIDP to OpenGL ES
-        for (int i = 0; i < rgbData.length; i++) {
-            int j = rgbData[i];
-            rgbData[i] = (j & 0xff000000) | ((j & 0x00ff0000) >> 16) | (j & 0x0000ff00) | ((j & 0x000000ff) << 16);
-        }
-
-        // copy to a direct NIO buffer
-        ByteBuffer textureBuffer = ByteBuffer.allocateDirect(4 * rgbData.length);
-        textureBuffer.asIntBuffer().put(rgbData);
-        textureBuffer.position(0);
-        gl.glTexImage2D(GL10.GL_TEXTURE_2D, 0, GL10.GL_RGBA, sphinxTextureImage.getWidth(), sphinxTextureImage.getHeight(), 0, GL10.GL_RGBA, GL10.GL_UNSIGNED_BYTE, textureBuffer);
     }
 
     private int getProperty(String propName, int def) {
@@ -156,6 +122,14 @@ class CubeCanvas extends GameCanvas implements Runnable {
         this.eglWindowSurface = egl.eglCreateWindowSurface(eglDisplay, eglConfig, g, null);
 
         this.initialized = true;
+    }
+
+    private void generateTexture() {
+        if (sphinxTexture != null) {
+            sphinxTexture.activateTexture();
+        } else {
+           sphinxTexture = new Texture(gl, rgbData, sphinxTextureImage.getWidth(), sphinxTextureImage.getHeight());
+        }
     }
 
     private void perspective(float fovy, float aspect, float zNear, float zFar) {
@@ -272,6 +246,7 @@ class CubeCanvas extends GameCanvas implements Runnable {
     }
 
     public void shutdown() {
+        sphinxTexture.freeTexture();
         egl.eglMakeCurrent(eglDisplay, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE,
                 EGL10.EGL_NO_CONTEXT);
         egl.eglDestroyContext(eglDisplay, eglContext);
