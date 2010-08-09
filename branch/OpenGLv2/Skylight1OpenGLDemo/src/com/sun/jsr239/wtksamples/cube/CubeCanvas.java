@@ -4,7 +4,10 @@
  */
 package com.sun.jsr239.wtksamples.cube;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLContext;
@@ -12,6 +15,7 @@ import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.egl.EGLSurface;
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
 import skylight2.opengl.Geometry;
 import skylight2.opengl.ModelBuffer;
@@ -37,6 +41,8 @@ class CubeCanvas extends GameCanvas implements Runnable {
     Geometry geometry;
     TexturedNormaledBuffer buffer2;
     Geometry sphinx;
+    Image sphinxTextureImage;
+    int[] rgbData;
 
     public CubeCanvas(Cube cube) {
         super(true);
@@ -61,6 +67,47 @@ class CubeCanvas extends GameCanvas implements Runnable {
         geometryBuffer = new ModelBuffer(3);
         geometry = geometryBuffer.startTrianglesGeometry().addTriangle(0, 10, 10, 10, 0, 5, 0, 0, 0).endGeometry();
         geometryBuffer.flush();
+
+        InputStream sphinxTextureInputStream = CubeCanvas.class.getResourceAsStream("sphinx.png");
+        try {
+            sphinxTextureImage = Image.createImage(sphinxTextureInputStream);
+            rgbData = new int[sphinxTextureImage.getWidth() * sphinxTextureImage.getHeight()];
+            sphinxTextureImage.getRGB(rgbData, 0, sphinxTextureImage.getWidth(), 0, 0, sphinxTextureImage.getWidth(), sphinxTextureImage.getHeight());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    int textureId;
+
+    private void generateTexture() {
+        if (textureId != 0) {
+            return;
+        }
+        int results[] = new int[2];
+        gl.glGetIntegerv(GL10.GL_MAX_TEXTURE_UNITS, results, 0);
+        gl.glGetIntegerv(GL10.GL_MAX_TEXTURE_SIZE, results, 1);
+        System.out.println("available texture units " + results[0] + ", max side " + results[1]);
+
+        // generate a texture
+        final int[] textures = new int[1];
+        gl.glGenTextures(textures.length, textures, 0);
+        textureId = textures[0];
+        System.out.println("texture id = " + textureId);
+        gl.glBindTexture(GL10.GL_TEXTURE_2D, textureId);
+
+        // swap the byte ordering from MIDP to OpenGL ES
+        for (int i = 0; i < rgbData.length; i++) {
+            int j = rgbData[i];
+            rgbData[i] = (j & 0xff000000) | ((j & 0x00ff0000) >> 16) | (j & 0x0000ff00) | ((j & 0x000000ff) << 16);
+        }
+
+        // copy to a direct NIO buffer
+        ByteBuffer textureBuffer = ByteBuffer.allocateDirect(4 * rgbData.length);
+        textureBuffer.asIntBuffer().put(rgbData);
+        textureBuffer.position(0);
+        gl.glTexImage2D(GL10.GL_TEXTURE_2D, 0, GL10.GL_RGBA, sphinxTextureImage.getWidth(), sphinxTextureImage.getHeight(), 0, GL10.GL_RGBA, GL10.GL_UNSIGNED_BYTE, textureBuffer);
     }
 
     private int getProperty(String propName, int def) {
@@ -100,7 +147,6 @@ class CubeCanvas extends GameCanvas implements Runnable {
         egl.eglChooseConfig(eglDisplay, s_configAttribs, eglConfigs, eglConfigs.length, num_config);
         System.out.println("num_config[0] = " + num_config[0]);
 
-
         this.eglConfig = eglConfigs[0];
 
         this.eglContext = egl.eglCreateContext(eglDisplay, eglConfig, EGL10.EGL_NO_CONTEXT, null);
@@ -128,25 +174,38 @@ class CubeCanvas extends GameCanvas implements Runnable {
 
     private void updateState(int width, int height) {
         float[] light_position = {-50.f, 50.f, 50.f, 0.f};
-        float[] light_ambient = {0.125f, 0.125f, 0.125f, 1.f};
+        float[] light_ambient = {0.5f, 0.5f, 0.5f, 1.f};
         float[] light_diffuse = {1.0f, 1.0f, 1.0f, 1.f};
-        float[] material_spec = {1.0f, 1.0f, 1.0f, 0.f};
-        float[] zero_vec4 = {0.0f, 0.0f, 0.0f, 0.f};
+//        float[] material_spec = {1.0f, 1.0f, 1.0f, 0.f};
+//        float[] zero_vec4 = {0.0f, 0.0f, 0.0f, 0.f};
 
         float aspect = (height != 0) ? ((float) width / (float) height) : 1.0f;
 
         gl.glViewport(0, 0, width, height);
         gl.glScissor(0, 0, width, height);
 
+        gl.glActiveTexture(GL10.GL_TEXTURE0);
+        gl.glEnable(GL10.GL_TEXTURE_2D);
+
+        generateTexture();
+
+        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER,
+                GL10.GL_NEAREST);
+        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
+        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_WRAP_S, GL10.GL_REPEAT);
+        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_WRAP_T, GL10.GL_REPEAT);
+
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         gl.glLoadIdentity();
 
-        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_POSITION, light_position, 0);
         gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_AMBIENT, light_ambient, 0);
+        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_POSITION, light_position, 0);
         gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_DIFFUSE, light_diffuse, 0);
 //        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_SPECULAR, zero_vec4, 0);
 //        gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_SPECULAR, material_spec, 0);
 
+        gl.glDisable(GL10.GL_BLEND);
+//        gl.glBlendFunc(GL10.GL_ONE, GL10.GL_SRC_COLOR);
         gl.glEnable(GL10.GL_DEPTH_TEST);
         gl.glEnable(GL10.GL_NORMALIZE);
         gl.glEnable(GL10.GL_LIGHTING);
@@ -156,20 +215,19 @@ class CubeCanvas extends GameCanvas implements Runnable {
 
         gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_FASTEST);
 
-        gl.glShadeModel(GL10.GL_SMOOTH);
+//        gl.glShadeModel(GL10.GL_SMOOTH);
         gl.glDisable(GL10.GL_DITHER);
 
         // Clear background to blue
-        gl.glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+        gl.glClearColor(0.8f, 0.7f, 1f, 1.0f);
 
-//        gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-//        gl.glEnableClientState(GL10.GL_NORMAL_ARRAY);
-//        gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
+
+//	gl.glBlendFunc(GL10.GL_ONE, GL10.GL_ONE_MINUS_SRC_ALPHA);
 
         gl.glMatrixMode(GL10.GL_PROJECTION);
         gl.glLoadIdentity();
 
-        perspective(90.f, aspect, 0.1f, 1000.f);
+        perspective(90.f, aspect, 1f, 1000.f);
 
         gl.glFinish();
     }
@@ -188,36 +246,17 @@ class CubeCanvas extends GameCanvas implements Runnable {
         // Wait for GL to complete
         egl.eglWaitGL();
 
-        // Draw a green square using MIDP
-        g.setColor(0, 255, 0);
-        g.fillRect(20, 20, width - 40, height - 40);
-
         // Draw the scene using GL
         egl.eglWaitNative(EGL10.EGL_CORE_NATIVE_ENGINE, g);
 
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         gl.glLoadIdentity();
 
-        gl.glTranslatef(0.f, 0.f, -100.f);
-        gl.glRotatef((float) (time * 29.77f), 1.0f, 2.0f, 0.0f);
-        gl.glRotatef((float) (time * 22.311f), -0.1f, 0.0f, -5.0f);
+        gl.glTranslatef(0.f, -30.f, -50.f);
+        gl.glRotatef((float) (time * 29.77f), 0.0f, 1.0f, 0.0f);
 
-//        gl.glVertexPointer(3, GL10.GL_BYTE, 0, cubeVertices);
-//        gl.glColorPointer(4, GL10.GL_UNSIGNED_BYTE, 0, cubeColors);
-//        gl.glNormalPointer(GL10.GL_BYTE, 0, cubeNormals);
-
-//        gl.glDrawElements(GL10.GL_TRIANGLES, 6 * 6, GL10.GL_UNSIGNED_BYTE, cubeIndices);
-
-        // Tim's stuff
-//        gl.glColor4f(0, 0, 1, 1);
-//        geometryBuffer.enable(gl);
-//        geometry.draw(gl);
-//        geometryBuffer.disable(gl);
-
-        gl.glColor4f(1, 1, 1, 1);
+//        gl.glColor4f(1, 1, 1, 1);
         buffer2.enable(gl);
-        gl.glDisableClientState(GL10.GL_NORMAL_ARRAY);
-        gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
         sphinx.draw(gl);
         buffer2.disable(gl);
 
@@ -230,10 +269,6 @@ class CubeCanvas extends GameCanvas implements Runnable {
         // Release the context
         egl.eglMakeCurrent(eglDisplay, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE,
                 EGL10.EGL_NO_CONTEXT);
-
-        // Draw a red square using MIDP
-//        g.setColor(255, 0, 0);
-//        g.fillRect((width / 2) - 25, (height / 2) - 25, 50, 50);
     }
 
     public void shutdown() {
