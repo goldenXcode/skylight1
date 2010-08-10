@@ -1,0 +1,9 @@
+#summary Skylight1 OpenGL library
+
+= Introduction =
+
+Skylight1 OpenGL is a wrapper that provides a Domain Specific Language (DSL) to simplify coding the the Java binding for OpenGL ES - JSR 239.  The library is designed to work in any Java-language-based environment, including MIDP 2.0+ and Android 1.5+.
+
+= Details =
+
+The source code can be found at http://code.google.com/p/skylight1/source/browse/#svn/branch/OpenGLv2/SkylightOpenGL
