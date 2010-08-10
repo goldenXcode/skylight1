@@ -1,0 +1,7 @@
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: MIDlet Suite Vendor
+MIDlet-Jar-URL: OpenGL239Demo.jar
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-1: Cube,,com.sun.jsr239.wtksamples.cube.Cube
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Name: OpenGL239Demo MIDlet Suite

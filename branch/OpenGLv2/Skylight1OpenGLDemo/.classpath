@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.elipse.mtj.JavaMEContainer/MOTODEV SDK for Java(TM) ME 3.x/CANDYBAR"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SkylightOpenGL2"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
