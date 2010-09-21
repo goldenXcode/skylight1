@@ -46,8 +46,8 @@ public class TexturedColoredNormaledBuffer extends GeometryBuffer {
 
 		public Geometry endGeometry() {
 			final Geometry geometry = (Geometry) geometryStack.pop();
-			geometry.setVertexDataLength((currentVertexDataIndex - geometry.getVertexDataStartOffset())
-					/ (MODEL_COORDINATES_PER_VERTEX + TEXTURE_COORDINATES_PER_VERTEX));
+			geometry.setVertexDataLength(currentVertexDataIndex / (MODEL_COORDINATES_PER_VERTEX + TEXTURE_COORDINATES_PER_VERTEX)
+					- geometry.getVertexDataStartOffset());
 			return geometry;
 		}
 
@@ -260,8 +260,8 @@ public class TexturedColoredNormaledBuffer extends GeometryBuffer {
 
 		public Geometry endGeometry() {
 			final Geometry geometry = (Geometry) geometryStack.pop();
-			geometry.setVertexDataLength((currentVertexDataIndex - geometry.getVertexDataStartOffset())
-					/ (MODEL_COORDINATES_PER_VERTEX + TEXTURE_COORDINATES_PER_VERTEX));
+			geometry.setVertexDataLength(currentVertexDataIndex / (MODEL_COORDINATES_PER_VERTEX + TEXTURE_COORDINATES_PER_VERTEX)
+					- geometry.getVertexDataStartOffset());
 			return geometry;
 		}
 
@@ -350,7 +350,7 @@ public class TexturedColoredNormaledBuffer extends GeometryBuffer {
 		if (!geometryStack.isEmpty()) {
 			throw new RuntimeException(CORRECTLY_NESTED_EXCEPTION_MESSAGE);
 		}
-		geometryStack.push(new Geometry(this, currentVertexDataIndex, GL10.GL_TRIANGLES));
+		geometryStack.push(new Geometry(this, nextVertexDataIndex, GL10.GL_TRIANGLES));
 		return incompleteTrianglesGeometry;
 	}
 
@@ -358,7 +358,7 @@ public class TexturedColoredNormaledBuffer extends GeometryBuffer {
 		if (!geometryStack.isEmpty()) {
 			throw new RuntimeException(CORRECTLY_NESTED_EXCEPTION_MESSAGE);
 		}
-		geometryStack.push(new Geometry(this, currentVertexDataIndex, GL10.GL_TRIANGLE_STRIP));
+		geometryStack.push(new Geometry(this, nextVertexDataIndex, GL10.GL_TRIANGLE_STRIP));
 		return initialIncompleteTriangleStripGeometry;
 	}
 

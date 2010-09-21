@@ -50,7 +50,7 @@ public class ModelBuffer extends GeometryBuffer {
 
 		public Geometry endGeometry() {
 			final Geometry geometry = (Geometry) geometryStack.pop();
-			geometry.setVertexDataLength((nextVertexDataIndex - geometry.getVertexDataStartOffset()) / DATA_ELEMENTS_PER_VERTEX);
+			geometry.setVertexDataLength(nextVertexDataIndex / DATA_ELEMENTS_PER_VERTEX - geometry.getVertexDataStartOffset());
 			return geometry;
 		}
 
@@ -133,7 +133,7 @@ public class ModelBuffer extends GeometryBuffer {
 
 		public Geometry endGeometry() {
 			final Geometry geometry = (Geometry) geometryStack.pop();
-			geometry.setVertexDataLength((currentVertexDataIndex - geometry.getVertexDataStartOffset()) / DATA_ELEMENTS_PER_VERTEX);
+			geometry.setVertexDataLength(currentVertexDataIndex / DATA_ELEMENTS_PER_VERTEX - geometry.getVertexDataStartOffset());
 			return geometry;
 		}
 
@@ -157,7 +157,7 @@ public class ModelBuffer extends GeometryBuffer {
 		if (!geometryStack.isEmpty()) {
 			throw new RuntimeException(CORRECTLY_NESTED_EXCEPTION_MESSAGE);
 		}
-		geometryStack.push(new Geometry(this, currentVertexDataIndex, GL10.GL_TRIANGLES));
+		geometryStack.push(new Geometry(this, nextVertexDataIndex, GL10.GL_TRIANGLES));
 		return incompleteTrianglesGeometry;
 	}
 
@@ -165,7 +165,7 @@ public class ModelBuffer extends GeometryBuffer {
 		if (!geometryStack.isEmpty()) {
 			throw new RuntimeException(CORRECTLY_NESTED_EXCEPTION_MESSAGE);
 		}
-		geometryStack.push(new Geometry(this, currentVertexDataIndex, GL10.GL_TRIANGLE_STRIP));
+		geometryStack.push(new Geometry(this, nextVertexDataIndex, GL10.GL_TRIANGLE_STRIP));
 		return initialIncompleteTriangleStripGeometry;
 	}
 
