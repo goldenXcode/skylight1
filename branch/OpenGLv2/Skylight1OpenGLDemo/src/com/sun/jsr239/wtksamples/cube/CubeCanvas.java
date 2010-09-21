@@ -6,6 +6,7 @@ package com.sun.jsr239.wtksamples.cube;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Random;
 import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLContext;
@@ -18,6 +19,7 @@ import javax.microedition.lcdui.game.GameCanvas;
 import skylight2.opengl.Geometry;
 import skylight2.opengl.ModelBuffer;
 import skylight2.opengl.TexturedNormaledBuffer;
+import skylight2.opengl.TexturedNormaledBuffer.IncompleteTrianglesGeometry;
 import skylight2.opengl.files.ObjFileLoader;
 import skylight2.opengl.Texture;
 
@@ -38,11 +40,20 @@ class CubeCanvas extends GameCanvas implements Runnable {
     EGLContext eglContext;
     ModelBuffer geometryBuffer;
     Geometry geometry;
-    TexturedNormaledBuffer buffer2;
+    TexturedNormaledBuffer buffer;
     Geometry sphinx;
+    Geometry ground;
     Image sphinxTextureImage;
-    int[] rgbData;
+    Image atlasTextureImage;
+    int[] sphinxRGBData;
+    int[] atlasRGBData;
     Texture sphinxTexture;
+    Texture atlasTexture;
+    float direction = 0;
+    float positionX = 30;
+    float positionZ = 50;
+    float speed = 0;
+    private static final float HEIGHT_OF_PLAYER = 35;
 
     public CubeCanvas(Cube cube) {
         super(true);
@@ -52,28 +63,17 @@ class CubeCanvas extends GameCanvas implements Runnable {
         this.width = getWidth();
         this.height = getHeight();
 
-        buffer2 = new TexturedNormaledBuffer(924);
+        buffer = new TexturedNormaledBuffer(924 + (20 * 20 * 2 * 3));
         try {
             InputStream is = CubeCanvas.class.getResourceAsStream("sphinx_scaled.obj");
             ObjFileLoader objFileLoader = new ObjFileLoader(is);
-            sphinx = objFileLoader.createGeometry(buffer2);
-//            sphinx = buffer2.startTrianglesGeometry().addTriangle(0, 10, 10, 10, 0, 5, 0, 0, 0).setTextures(0, 1, 1, 1, 0, 1).setNormals(0, 0, 1, 0, 0, 1, 0, 0, 1).addTriangle(0, 10, 10, -10, 0, 5, 0, 0, 0).setTextures(0, 1, 1, 1, 0, 1).setNormals(0, 0, 1, 0, 0, 1, 0, 0, 1).endGeometry();
-            buffer2.flush();
+            sphinx = objFileLoader.createGeometry(buffer);
+            ground = makeGround(buffer);
+            buffer.flush();
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
         }
-
-        final InputStream sphinxTextureInputStream = CubeCanvas.class.getResourceAsStream("sphinx.png");
-        try {
-            sphinxTextureImage = Image.createImage(sphinxTextureInputStream);
-            rgbData = new int[sphinxTextureImage.getWidth() * sphinxTextureImage.getHeight()];
-            sphinxTextureImage.getRGB(rgbData, 0, sphinxTextureImage.getWidth(), 0, 0, sphinxTextureImage.getWidth(), sphinxTextureImage.getHeight());
-            Texture.swapByteOrder(rgbData);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
     }
 
     private int getProperty(String propName, int def) {
@@ -124,11 +124,36 @@ class CubeCanvas extends GameCanvas implements Runnable {
         this.initialized = true;
     }
 
-    private void generateTexture() {
+    private void generateTextures() {
         if (sphinxTexture != null) {
             sphinxTexture.activateTexture();
+            atlasTexture.activateTexture();
         } else {
-           sphinxTexture = new Texture(gl, rgbData, sphinxTextureImage.getWidth(), sphinxTextureImage.getHeight());
+            final InputStream atlasTextureInputStream = CubeCanvas.class.getResourceAsStream("textures.PNG");
+            try {
+                atlasTextureImage = Image.createImage(atlasTextureInputStream);
+                atlasRGBData = new int[atlasTextureImage.getWidth() * atlasTextureImage.getHeight()];
+                atlasTextureImage.getRGB(atlasRGBData, 0, atlasTextureImage.getWidth(), 0, 0, atlasTextureImage.getWidth(), atlasTextureImage.getHeight());
+                Texture.swapByteOrder(atlasRGBData);
+                atlasTexture = new Texture(gl, atlasRGBData, atlasTextureImage.getWidth(), atlasTextureImage.getHeight());
+                atlasTextureImage = null;
+                atlasRGBData = null;
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+            final InputStream sphinxTextureInputStream = CubeCanvas.class.getResourceAsStream("sphinx.png");
+            try {
+                sphinxTextureImage = Image.createImage(sphinxTextureInputStream);
+                sphinxRGBData = new int[sphinxTextureImage.getWidth() * sphinxTextureImage.getHeight()];
+                sphinxTextureImage.getRGB(sphinxRGBData, 0, sphinxTextureImage.getWidth(), 0, 0, sphinxTextureImage.getWidth(), sphinxTextureImage.getHeight());
+                Texture.swapByteOrder(sphinxRGBData);
+                sphinxTexture = new Texture(gl, sphinxRGBData, sphinxTextureImage.getWidth(), sphinxTextureImage.getHeight());
+                sphinxTextureImage = null;
+                sphinxRGBData = null;
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -161,7 +186,7 @@ class CubeCanvas extends GameCanvas implements Runnable {
         gl.glActiveTexture(GL10.GL_TEXTURE0);
         gl.glEnable(GL10.GL_TEXTURE_2D);
 
-        generateTexture();
+        generateTextures();
 
         gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER,
                 GL10.GL_NEAREST);
@@ -195,6 +220,12 @@ class CubeCanvas extends GameCanvas implements Runnable {
         // Clear background to blue
         gl.glClearColor(0.8f, 0.7f, 1f, 1.0f);
 
+//        gl.glEnable(GL10.GL_FOG);
+//        gl.glFogf(GL10.GL_FOG_START, 100f);
+//        gl.glFogf(GL10.GL_FOG_END, 150f);
+//        gl.glFogf(GL10.GL_FOG_MODE, GL10.GL_LINEAR);
+//        gl.glFogfv(GL10.GL_FOG_COLOR, new float[] {1f, 1f, 1f, 0.5f}, 0);
+
 
 //	gl.glBlendFunc(GL10.GL_ONE, GL10.GL_ONE_MINUS_SRC_ALPHA);
 
@@ -226,17 +257,36 @@ class CubeCanvas extends GameCanvas implements Runnable {
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         gl.glLoadIdentity();
 
-        gl.glTranslatef(0.f, -30.f, -50.f);
-        gl.glRotatef((float) (time * 29.77f), 0.0f, 1.0f, 0.0f);
+        gl.glRotatef(-direction, 0.0f, 1.0f, 0.0f);
+        gl.glTranslatef(-positionX, -HEIGHT_OF_PLAYER, -positionZ);
 
 //        gl.glColor4f(1, 1, 1, 1);
-        buffer2.enable(gl);
+        buffer.enable(gl);
+        atlasTexture.activateTexture();
+        ground.draw(gl);
+        sphinxTexture.activateTexture();
         sphinx.draw(gl);
-        buffer2.disable(gl);
+        buffer.disable(gl);
 
         gl.glFinish();
 
         time += 0.1f;
+
+        // Get the key state and store it
+        int keyState = getKeyStates();
+        if ((keyState & LEFT_PRESSED) != 0) {
+            direction += 5;
+        } else if ((keyState & RIGHT_PRESSED) != 0) {
+            direction -= 5;
+        }
+        if ((keyState & UP_PRESSED) != 0) {
+            speed += 0.1f;
+        } else if ((keyState & DOWN_PRESSED) != 0) {
+            speed -= 0.1f;
+        }
+
+        positionX -= Math.sin(Math.PI * direction / 180f) * speed;
+        positionZ -= Math.cos(Math.PI * direction / 180f) * speed;
 
         egl.eglWaitGL();
 
@@ -272,5 +322,31 @@ class CubeCanvas extends GameCanvas implements Runnable {
         }
 
         shutdown();
+    }
+
+    private Geometry makeGround(TexturedNormaledBuffer aBuffer) {
+        IncompleteTrianglesGeometry incompleteGeometry = aBuffer.startTrianglesGeometry();
+
+        float u1 = 320f / 1024f;
+        float u2 = (320f + 256f) / 1024f;
+        float v1 = 0;
+        float v2 = 256f / 1024f;
+        final float GROUND_EDGE_LENGTH = 50;
+
+        for (int x = -10; x < 10; x++) {
+            for (int z = -10; z < 10; z++) {
+                float h00 = new Random(x+z*100).nextFloat() * 20f - 10f;
+                float h10 = new Random(x+1+z*100).nextFloat() * 20f - 10f;
+                float h01 = new Random(x+(z+1)*100).nextFloat() * 20f - 10f;
+                float h11 = new Random(x+1+(z+1)*100).nextFloat() * 20f - 10f;
+                incompleteGeometry = incompleteGeometry.addTriangle(x * GROUND_EDGE_LENGTH, h00, z * GROUND_EDGE_LENGTH, x * GROUND_EDGE_LENGTH, h01, (z + 1f) * GROUND_EDGE_LENGTH, (x + 1f) * GROUND_EDGE_LENGTH, h10, z * GROUND_EDGE_LENGTH).
+                        setTextures(u1, v1, u1, v2, u2, v1).
+                        setNormals(0, 1, 0, 0, 1, 0, 0, 1, 0);
+                incompleteGeometry = incompleteGeometry.addTriangle(x * GROUND_EDGE_LENGTH, h01, (z + 1f) * GROUND_EDGE_LENGTH, (x + 1f) * GROUND_EDGE_LENGTH, h11, (z + 1f) * GROUND_EDGE_LENGTH, (x + 1f) * GROUND_EDGE_LENGTH, h10, z * GROUND_EDGE_LENGTH).
+                        setTextures(u1, v2, u2, v2, u2, v1).
+                        setNormals(0, 1, 0, 0, 1, 0, 0, 1, 0);
+            }
+        }
+        return incompleteGeometry.endGeometry();
     }
 }
