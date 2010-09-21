@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sun.jsr239.wtksamples.cube;
+package skylight1.opengl.demo.javame;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +23,7 @@ import skylight2.opengl.TexturedNormaledBuffer.IncompleteTrianglesGeometry;
 import skylight2.opengl.files.ObjFileLoader;
 import skylight2.opengl.Texture;
 
-class CubeCanvas extends GameCanvas implements Runnable {
+class DemoGameCanvas extends GameCanvas implements Runnable {
 
     boolean initialized = false;
     int frame = 0;
@@ -31,7 +31,7 @@ class CubeCanvas extends GameCanvas implements Runnable {
     Graphics g;
     int width;
     int height;
-    Cube cube;
+    DemoGame cube;
     EGL10 egl;
     GL10 gl;
     EGLConfig eglConfig;
@@ -55,7 +55,7 @@ class CubeCanvas extends GameCanvas implements Runnable {
     float speed = 0;
     private static final float HEIGHT_OF_PLAYER = 35;
 
-    public CubeCanvas(Cube cube) {
+    public DemoGameCanvas(DemoGame cube) {
         super(true);
         this.cube = cube;
         this.g = this.getGraphics();
@@ -65,7 +65,7 @@ class CubeCanvas extends GameCanvas implements Runnable {
 
         buffer = new TexturedNormaledBuffer(924 + (20 * 20 * 2 * 3));
         try {
-            InputStream is = CubeCanvas.class.getResourceAsStream("sphinx_scaled.obj");
+            InputStream is = DemoGameCanvas.class.getResourceAsStream("sphinx_scaled.obj");
             ObjFileLoader objFileLoader = new ObjFileLoader(is);
             sphinx = objFileLoader.createGeometry(buffer);
             ground = makeGround(buffer);
@@ -129,7 +129,7 @@ class CubeCanvas extends GameCanvas implements Runnable {
             sphinxTexture.activateTexture();
             atlasTexture.activateTexture();
         } else {
-            final InputStream atlasTextureInputStream = CubeCanvas.class.getResourceAsStream("textures.PNG");
+            final InputStream atlasTextureInputStream = DemoGameCanvas.class.getResourceAsStream("textures.PNG");
             try {
                 atlasTextureImage = Image.createImage(atlasTextureInputStream);
                 atlasRGBData = new int[atlasTextureImage.getWidth() * atlasTextureImage.getHeight()];
@@ -142,7 +142,7 @@ class CubeCanvas extends GameCanvas implements Runnable {
                 ex.printStackTrace();
             }
 
-            final InputStream sphinxTextureInputStream = CubeCanvas.class.getResourceAsStream("sphinx.png");
+            final InputStream sphinxTextureInputStream = DemoGameCanvas.class.getResourceAsStream("sphinx.png");
             try {
                 sphinxTextureImage = Image.createImage(sphinxTextureInputStream);
                 sphinxRGBData = new int[sphinxTextureImage.getWidth() * sphinxTextureImage.getHeight()];
@@ -335,10 +335,10 @@ class CubeCanvas extends GameCanvas implements Runnable {
 
         for (int x = -10; x < 10; x++) {
             for (int z = -10; z < 10; z++) {
-                float h00 = new Random(x+z*100).nextFloat() * 20f - 10f;
-                float h10 = new Random(x+1+z*100).nextFloat() * 20f - 10f;
-                float h01 = new Random(x+(z+1)*100).nextFloat() * 20f - 10f;
-                float h11 = new Random(x+1+(z+1)*100).nextFloat() * 20f - 10f;
+                float h00 = new Random(x + z * 100).nextFloat() * 20f - 10f;
+                float h10 = new Random(x + 1 + z * 100).nextFloat() * 20f - 10f;
+                float h01 = new Random(x + (z + 1) * 100).nextFloat() * 20f - 10f;
+                float h11 = new Random(x + 1 + (z + 1) * 100).nextFloat() * 20f - 10f;
                 incompleteGeometry = incompleteGeometry.addTriangle(x * GROUND_EDGE_LENGTH, h00, z * GROUND_EDGE_LENGTH, x * GROUND_EDGE_LENGTH, h01, (z + 1f) * GROUND_EDGE_LENGTH, (x + 1f) * GROUND_EDGE_LENGTH, h10, z * GROUND_EDGE_LENGTH).
                         setTextures(u1, v1, u1, v2, u2, v1).
                         setNormals(0, 1, 0, 0, 1, 0, 0, 1, 0);

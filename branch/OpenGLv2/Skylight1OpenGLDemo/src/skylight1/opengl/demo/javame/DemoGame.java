@@ -29,7 +29,7 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sun.jsr239.wtksamples.cube;
+package skylight1.opengl.demo.javame;
 
 import java.nio.*;
 
@@ -40,24 +40,23 @@ import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Graphics;
-import javax.microedition.lcdui.game.GameCanvas;
 import javax.microedition.midlet.MIDlet;
 
 
 
 
-public class Cube extends MIDlet implements CommandListener {
+public class DemoGame extends MIDlet implements CommandListener {
     private final Command exitCommand = new Command("Exit", Command.EXIT, 1);
     Display display;
-    CubeCanvas canvas;
+    DemoGameCanvas canvas;
     boolean started = false;
     boolean paused = false;
     boolean finished = false;
     Thread drawThread;
 
-    public Cube() {
+    public DemoGame() {
         this.display = Display.getDisplay(this);
-        this.canvas = new CubeCanvas(this);
+        this.canvas = new DemoGameCanvas(this);
         this.canvas.setCommandListener(this);
         this.canvas.addCommand(exitCommand);
     }
