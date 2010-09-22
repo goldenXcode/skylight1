@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Skylight1 OpenGL is a wrapper that provides a Domain Specific Language (DSL) to simplify coding the the Java binding for OpenGL ES - JSR 239.  The library is designed to work in any Java-language-based environment, including MIDP 2.0+ and Android 1.5+.
+Skylight1 OpenGL is a wrapper that provides a Domain Specific Language (DSL) to simplify coding the Java binding for OpenGL ES - JSR 239.  The library is designed to work in any Java-language-based environment, including MIDP 2.0+ and Android 1.5+.
 
 = Details =
 
