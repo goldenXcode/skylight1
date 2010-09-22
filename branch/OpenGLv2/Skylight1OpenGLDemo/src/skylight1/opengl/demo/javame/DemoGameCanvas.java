@@ -16,12 +16,12 @@ import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
-import skylight2.opengl.Geometry;
-import skylight2.opengl.ModelBuffer;
-import skylight2.opengl.TexturedNormaledBuffer;
-import skylight2.opengl.TexturedNormaledBuffer.IncompleteTrianglesGeometry;
-import skylight2.opengl.files.ObjFileLoader;
-import skylight2.opengl.Texture;
+import skylight1.opengl2.Geometry;
+import skylight1.opengl2.ModelBuffer;
+import skylight1.opengl2.Texture;
+import skylight1.opengl2.TexturedNormaledBuffer;
+import skylight1.opengl2.TexturedNormaledBuffer.IncompleteTrianglesGeometry;
+import skylight1.opengl2.files.ObjFileLoader;
 
 class DemoGameCanvas extends GameCanvas implements Runnable {
 
