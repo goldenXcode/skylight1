@@ -17,13 +17,13 @@ To check out a project, open the SVN Repository view in Eclipse and right click 
 Coding Guidelines: http://source.android.com/source/code-style.html.
 
 
-=== How to build Balance the Beer (SkylightGame):===
+=== How to build Balance the Beer (listed as Skylight Game):===
 
 Checkout the following projects from trunk: (right click on these within SVN Repositories View)
 
-  SkylightDI
-  SkylightGame
-  SkylightUtils
+  * Skylight DI
+  * Skylight Game
+  * Skylight Utils
 
 SkylightGame depends on the other two subprojects, so you need to build them as well.
 
