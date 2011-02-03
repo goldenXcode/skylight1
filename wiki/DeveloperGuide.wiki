@@ -5,23 +5,40 @@ To submit issues using the Issues tracker (tab above) see the [UserGuide]
 How Do I Checkout Code From Eclipse (for command line see Source tab above)?
 
 Prerequisites:
+  * Install a Java JRE/SDK (1.6 recommended) if you already don't have one installed by default.
   * Install the latest version of Eclipse.
-  * Install the Android SDK.
-  * Install the ADT plug-in for Eclipse.
+  * Install the latest Android SDK (done only initially - updates managed by plugin)
+  * Install the latest ADT plug-in for Eclipse (initially specify where you installed SDK)
   * Install the a subversion plug-in for Eclipse (we recommend Subclipse).
-
 
 To check out a project, open the SVN Repository view in Eclipse right click on a project (for demos drill down first to the project) then simply use default checkout..:  "check out as project..."
 
-
-Coding Guidelines:
-(to be continued)
+Coding Guidelines: http://source.android.com/source/code-style.html.
 
 
+=== How to build Balance the Beer (SkylightGame):===
+
+Using the following repository (add one within eclipse using SVN Repository View):
+http://skylight1.googlecode.com/svn/trunk
+
+Checkout the following projects from trunk:
+
+SkylightDI
+SkylightGame
+SkylightUtils
+
+SkylightGame deoends on the other two subprojects, so you need to build them as well.
+
+Note: if you have any issues building, do a Project Properties -> Clean Project or deleted the bin and gen folders to re-build project.
+
+To run, simply Run As Android Project (right click on SkylightGame project).
+
+Obviously some features (such as sensors, accelerometer) are not available with the emulator. You can more easily switch between device and emulator(s) (you can have more than one open) if you set the Run configuration Target property to Manual so that you can select which device to run.
+
+---
 
 The Skylight1 open source project is open to all to participate in (submit patches, test, create derivative projects). The closed source project(s) are limited to those members who attend our meetings (in NYC).
 
 _*If in NYC, stop by a [http://nyc-gtug.org GTUG] meeting, the [http://meetup.com/nycjava NYC Java Meetup] or visit [http://nycjava.net] for more info.*_
 
-There's a beginner's stock market app, which depending on its progress may be entered in the Reuter's Challenge.
-The wiki page for that project is here: [MarketApp]
+There's a beginner's stock market app, which depending on its progress may be entered in the Reuter's Challenge. The wiki page for that project is here: [MarketApp]
