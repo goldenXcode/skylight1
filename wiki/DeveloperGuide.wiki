@@ -2,38 +2,36 @@
 
 To submit issues using the Issues tracker (tab above) see the [UserGuide]
 
-How Do I Checkout Code From Eclipse (for command line see Source tab above)?
-
-Prerequisites:
+Build Prerequisites:
   * Install a Java JRE/SDK (1.6 recommended) if you already don't have one installed by default.
   * Install the latest version of Eclipse.
   * Install the latest Android SDK (done only initially - updates managed by plugin)
   * Install the latest ADT plug-in for Eclipse (initially specify where you installed SDK)
   * Install the a subversion plug-in for Eclipse (we recommend Subclipse).
 
-To check out a project, open the SVN Repository view in Eclipse right click on a project (for demos drill down first to the project) then simply use default checkout..:  "check out as project..."
+Use the following repository (add one within eclipse using SVN Repository View):
+http://skylight1.googlecode.com/svn/trunk   (committers will use https instead).
+
+To check out a project, open the SVN Repository view in Eclipse and right click on the project you are interested in (for demos drill down into subfolders) and then simply use default checkout..:  "check out as project..."  See example below.
 
 Coding Guidelines: http://source.android.com/source/code-style.html.
 
 
 === How to build Balance the Beer (SkylightGame):===
 
-Using the following repository (add one within eclipse using SVN Repository View):
-http://skylight1.googlecode.com/svn/trunk
+Checkout the following projects from trunk: (right click on these within SVN Repositories View)
 
-Checkout the following projects from trunk:
+  SkylightDI
+  SkylightGame
+  SkylightUtils
 
-SkylightDI
-SkylightGame
-SkylightUtils
+SkylightGame depends on the other two subprojects, so you need to build them as well.
 
-SkylightGame deoends on the other two subprojects, so you need to build them as well.
-
-Note: if you have any issues building, do a Project Properties -> Clean Project or deleted the bin and gen folders to re-build project.
+Note: if you have any issues building, do a Project Properties -> Clean Project or delete the bin and gen folders to re-build the project.
 
 To run, simply Run As Android Project (right click on SkylightGame project).
 
-Obviously some features (such as sensors, accelerometer) are not available with the emulator. You can more easily switch between device and emulator(s) (you can have more than one open) if you set the Run configuration Target property to Manual so that you can select which device to run.
+Obviously some features (such as sensors, accelerometer) are not available with the emulator. You can more easily switch between device and emulator(s) (you can have more than one open) if you set the Run Configuration Target property to Manual so that you can select which device to run when you click on Run.
 
 ---
 
