@@ -35,6 +35,6 @@ Obviously some features (such as sensors, accelerometer) are not available with 
 
 ---
 
-The Skylight1 open source project is open to all to participate in (submit patches, test, create derivative projects). The closed source project(s) are limited to those members who attend our meetings (in NYC).
+The Skylight1 open source project is open to all to participate in (submit patches, test, create derivative projects). The closed source project(s) is currently limited to those members who attend our meetings in NYC.
 
 _*If in NYC, stop by a [http://nyc-gtug.org NYC GTUG (Google Technologies User Group)] meeting, the [http://meetup.com/nycjava NYC Java Meetup] or visit [http://nycjava.net] for more info.*_
