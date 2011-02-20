@@ -37,7 +37,7 @@ Obviously some features (such as sensors, accelerometer) are not available with 
 
 Additional Notes:
 
-Currently we are migrating from using third party libraries (found in libs folder) to using a maven repository for third party dependencies (which may require maven / maven plugin). alternately you will soon have to manually add the third party libraries to the libs folder (list of libraries will be added to a README.txt)
+Currently we are migrating from including third party libraries (found in libs folder) to using a maven repository for third party dependencies (which may require installing maven / maven plugin). alternatively you can manually add the third party libraries to the libs folder (the list of libraries will be added to a README.txt once they are removed from the svn repo)
 
 ---
 
