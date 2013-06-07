@@ -14,12 +14,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 
 public class SelectMealTimesFragment extends Fragment {
     private MealtimeAdapter mealAdapter;
     private PreferencesDao mealTimePreferences;
+	private Button button;
 
     public static SelectMealTimesFragment newInstance() {
         SelectMealTimesFragment fragment = new SelectMealTimesFragment();
@@ -37,7 +39,14 @@ public class SelectMealTimesFragment extends Fragment {
 
         mealAdapter = new MealtimeAdapter(getActivity(),mealtimes,mealTimePreferences);
         ListView mealList = (ListView)aView.findViewById(android.R.id.list);
-
+        button = (Button) aView.findViewById(R.id.button1);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            	gotoDashboard(v);
+            }
+        });
+        
         mealList.setAdapter(mealAdapter);
 
         return aView;
