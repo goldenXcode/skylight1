@@ -8,8 +8,10 @@
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
         <!-- API 14 theme customizations can go here. -->
     </style>
+
     <style name="Theme.PageIndicatorDefaults" parent="android:Theme.Holo.Light">
-        <item name="vpiIconPageIndicatorStyle">@style/Widget.IconPageIndicator</item>
-        <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator</item>
+<!--         <item name="vpiIconPageIndicatorStyle">@style/Widget.IconPageIndicator</item>
+ -->        <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator</item>
     </style>
+
 </resources>
