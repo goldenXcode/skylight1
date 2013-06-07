@@ -56,7 +56,6 @@ public class ShowRestaurantDetailActivity extends Activity implements
 		tvRestaurantPhone.setTag(restaurant.getPhone());
 		tvRestaurantPhone.setPaintFlags(tvRestaurantPhone.getPaintFlags()
 				| Paint.UNDERLINE_TEXT_FLAG);
-
 		final Address address = restaurant.getAddress();
 		final TextView tvStreet = (TextView) findViewById(R.id.tv_detail_restaurant_street);
 		final String street = address.getBuilding() + " " + address.getStreet();
