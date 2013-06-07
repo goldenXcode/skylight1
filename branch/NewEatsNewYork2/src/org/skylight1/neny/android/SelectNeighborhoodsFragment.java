@@ -57,7 +57,7 @@ public class SelectNeighborhoodsFragment extends Fragment {
 		 * R.drawable.n_les_active, R.drawable.n_east_village_active,
 		 * R.drawable.n_wall_st_active);
 		 */
-		final List<Integer> neighborhoodActiveImageResources =
+		final List<Integer> neighborhoodInactiveImageResources =
 
 		Arrays.asList(R.drawable.n_inwood_inactive,
 				R.drawable.n_harlem_inactive,
@@ -68,7 +68,7 @@ public class SelectNeighborhoodsFragment extends Fragment {
 				R.drawable.n_les_inactive, R.drawable.n_east_village_inactive,
 				R.drawable.n_wall_st_inactive);
 
-		final List<Integer> neighborhoodInactiveImageResources =
+		final List<Integer> neighborhoodActiveImageResources =
 
 		Arrays.asList(R.drawable.n_inwood_active, R.drawable.n_harlem_active,
 				R.drawable.n_east_harlem_active, R.drawable.n_uws_active,
