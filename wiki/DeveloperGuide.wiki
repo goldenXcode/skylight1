@@ -1,5 +1,7 @@
 === Developer How To & Guidelines ===
 
+note: needs updating (last updated 2009)
+
 To submit issues using the Issues tracker (tab above) see the [UserGuide]
 
 Build Prerequisites:
@@ -43,4 +45,4 @@ Currently we are migrating from including third party libraries (found in libs f
 
 The Skylight1 open source project is open to all to participate in (submit patches, test, create derivative projects). The closed source project(s) is currently limited to those members who attend our meetings in NYC.
 
-_*If in NYC, stop by a [http://nyc-gtug.org NYC GTUG (Google Technologies User Group)] meeting, the [http://meetup.com/nycjava NYC Java Meetup] or visit [http://nycjava.net] for more info.*_
+_*If in NYC, stop by a [http://meetup.com/nyc-gdg NYC GDG (Google Developer Group)] meeting.*_
