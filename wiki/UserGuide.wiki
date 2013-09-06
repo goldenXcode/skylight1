@@ -15,4 +15,4 @@ To submit an issue using the Issues tracker:
  # under Labels (optional, we can also fill this in) but feel free to specify:
   # Type
   # Priority
-  # Name of Application (don't select from the choices, just type it in e.g. BTB, NYCEvents or Toast)
+  # Name of Application (don't select from the choices, just type it in e.g. NYE, BTB)
